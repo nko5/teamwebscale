@@ -50,6 +50,17 @@ npm test
 npm run dev
 ~~~
 
+### GoogleImages
+
+using the deprecated google image api
+
+sample curl request
+
+~~~sh
+curl -e http://teamwebscale.2015.nodeknockout.com \
+'https://ajax.googleapis.com/ajax/services/search/images?v=1.0&userip=167.216.21.52&q=node%20js' | python -m json.tool
+~~~
+
 ### Deploying the app with Docker
 
 _from the teamwebscale project directory_
