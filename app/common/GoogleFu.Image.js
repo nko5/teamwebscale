@@ -1,4 +1,5 @@
 'use strict';
+
 /*global
   GoogleFu
 */
@@ -13,5 +14,12 @@ GoogleFu.Image = class Image{
     return false;
   }
 
+  static getTop(){
+    return false;
+  }
+
+  static getTopThumbnail(){
+    return false;
+  }
 };
 
