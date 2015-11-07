@@ -1,6 +1,5 @@
 MainLayout = React.createClass({
   render() {
-    let test = Meteor.settings.public.version;
     return (
       <div>
         <Header />
