@@ -13,7 +13,7 @@ Schemas.Game = new SimpleSchema({
     max: 10,
     optional: true,
     custom: function () {
-      var shouldBeRequired = this.field('type').value == 0;
+      var shouldBeRequired = this.field('type').value == GoogleFu.Constants.PRIVATE_GAME;
 
       if(shouldBeRequired){
         if (!this.operator) {
@@ -30,7 +30,7 @@ Schemas.Game = new SimpleSchema({
   },
   type: {
     type: Number,
-    allowedValues: [0, 1],
+    allowedValues: [GoogleFu.Constants.PRIVATE_GAME, GoogleFu.Constants.PUBLIC_GAME],
   },
   players: {
     type: [Object],
