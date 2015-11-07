@@ -61,6 +61,30 @@ curl -e http://teamwebscale.2015.nodeknockout.com \
 'https://ajax.googleapis.com/ajax/services/search/images?v=1.0&userip=167.216.21.52&q=node%20js' | python -m json.tool
 ~~~
 
+### Running in Docker
+
+setup persistent mongo db, link to this from ephemeral meteor container
+```
+docker run --name teamwebscale-db -d mongo
+```
+
+run meteor project
+
+be in project, /app subdirectory
+```
+cd ./app
+```
+
+run meteor app in docker
+```
+docker run -it --name google-fu --rm -p 3000:3000 -v "$PWD":/app --link teamwebscale-db:db -e "MONGO_URL=mongodb://db" danieldent/meteor
+```
+
+running any meteor commands such as `add` or `deploy`
+```
+docker run -it --rm -v "$PWD":/app danieldent/meteor meteor [your command and arguments here]
+```
+
 ### Deploying the app with Docker
 
 _from the teamwebscale project directory_
