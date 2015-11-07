@@ -6,5 +6,9 @@ module.exports = class GoogleImages{
     return false;
   }
 
+  static queryThumbnails(){
+    return false;
+  }
+
 };
 
