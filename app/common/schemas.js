@@ -27,7 +27,7 @@ Schemas.Game = new SimpleSchema({
         }
       }
     }
-  }
+  },
   type: {
     type: Number,
     allowedValues: [GoogleFu.Constants.PUBLIC_GAME, GoogleFu.Constants.PRIVATE_GAME],

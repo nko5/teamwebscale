@@ -1,5 +1,5 @@
 "use strict";
-Meteor.startup({
+Meteor.startup(function(){
   //Setup GoogleFu namespace at startup
   GoogleFu = {};
 
