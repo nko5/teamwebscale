@@ -1,6 +1,9 @@
 'use strict';
+/*global
+  GoogleFu
+*/
 
-module.exports = class GoogleImages{
+GoogleFu.Image = class Image{
 
   static query(){
     return false;
