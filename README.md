@@ -44,6 +44,12 @@ npm start
 npm test
 ~~~
 
+### Tests During Development
+
+~~~sh
+npm run dev
+~~~
+
 ### Deploying the app with Docker
 
 _from the teamwebscale project directory_
