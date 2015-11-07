@@ -26,6 +26,12 @@ Join a game, enter a **game code** _or_ select a public game to play with strang
 
 # Development
 
+### File Structure
+
+Almost everything can be replaced, however, the `scripts/postinstall.js` and `package.json` files must be in tact.
+
+`npm start` must **work** to start the app, because that's how modulus will serve the app.
+
 ### Running The App
 
 ~~~sh
