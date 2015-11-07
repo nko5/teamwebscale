@@ -14,5 +14,8 @@ GoogleFu.Image = class Image{
     return false;
   }
 
+  static getTop(){
+    return false;
+  }
 };
 

@@ -119,6 +119,41 @@ if (!(typeof MochaWeb === 'undefined')){
 
       });
 
+      describe('getTop( query:String ):StringID [static method]', () => {
+
+        describe('getTop("node js");', () => {
+
+          let node_js_result;
+          before(() => {
+            node_js_result = GoogleFu.Image.getTop("node js");
+          });
+
+          it('should return a string', () => {
+            expect(node_js_result).to.be.an.instanceof(String);
+          });
+
+          // this may fail if result change
+          it('should return the exact top result', () =>{
+            expect(node_js_result).to.be.equal('ANd9GcRjywSMf0DDvBI1paHhKcXQ91SxTZBe7kd48qLwC3KO2Z09S3kIXZpANQdU');
+          });
+
+        });
+
+        describe('getTop("javascript");', () => {
+
+          let javascript_result;
+          before(() => {
+            javascript_result = GoogleFu.Image.getTop("javascript");
+          });
+
+          // this may fail if result change
+          it('should return the exact top result', () =>{
+            expect(javascript_result).to.be.equal('ANd9GcReV5JLtAkhBg_8nb1X3Hwmgz79xD12Yho2EADgq0MyWz9N-qqza1lPb81z');
+          });
+        });
+
+      });
+
     });
   });
 }
