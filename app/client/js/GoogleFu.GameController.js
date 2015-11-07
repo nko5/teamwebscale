@@ -11,7 +11,7 @@ GoogleFu.GameController = (function(){
       type: type, 
       code: code, 
       players: [userId]
-    }, function(err, result){
+    }, (err, result) => {
       if(err) return done(err);
 
       done(null, result);
@@ -29,9 +29,9 @@ GoogleFu.GameController = (function(){
   }
 
   function createPublicGame(name, done){
-    var gameTitle = getGameTitle();
+    let gameTitle = getGameTitle();
 
-    Accounts.createUser({username: name + Math.random(), password: 'random', profile:{name: name}}, function(err){
+    Accounts.createUser({username: name + Math.random(), password: 'random', profile:{name: name}}, (err) => {
       if(err){
         throw new Meteor.Error('Could not create user');
       }
@@ -41,10 +41,10 @@ GoogleFu.GameController = (function(){
   }
 
   function createPrivateGame(name, done){
-    var gameTitle = getGameTitle();
-    var gameAccessCode = getGameAccessCode();
+    let gameTitle = getGameTitle();
+    let gameAccessCode = getGameAccessCode();
 
-    Accounts.createUser({username: name + Math.random(), password: 'random', profile: {name: name}}, function(err){
+    Accounts.createUser({username: name + Math.random(), password: 'random', profile: {name: name}}, (err) => {
       if(err){
         throw new Meteor.Error('Could not create user');
       }
