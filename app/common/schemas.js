@@ -34,7 +34,6 @@ Schemas.Game = new SimpleSchema({
   },
   players: {
     type: [Object],
-    optional: true
   }
 });
 
