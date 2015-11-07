@@ -4,7 +4,7 @@ let mocha = require('mocha');
 let Code = require('code');
 let expect = Code.expect;
 
-let GoogleImages = require('../lib/google_images.js');
+let GoogleImages = require('../../../common/google_images.js');
 
 describe('GoogleImages', () => {
 
