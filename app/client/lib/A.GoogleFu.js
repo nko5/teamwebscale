@@ -1,7 +1,8 @@
-"use strict";
+GoogleFu = {};
 Meteor.startup(function(){
+  console.log('startup');
   //Setup GoogleFu namespace at startup
-  GoogleFu = {};
+  // GoogleFu = {};
 
   //Create application wide Constants and freeze object for true read only behavior
   GoogleFu.Constants = {

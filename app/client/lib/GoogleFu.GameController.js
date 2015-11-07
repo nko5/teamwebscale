@@ -1,5 +1,3 @@
-"use strict";
-
 GoogleFu.GameController = (function(){
   function createGame(name, type, code, done){
     Games.insert({title: name, type: type, code: code}, function(err, result){
