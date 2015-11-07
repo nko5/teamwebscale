@@ -99,7 +99,7 @@ if (!(typeof MochaWeb === 'undefined')){
 
         });
 
-        describe('query("javascript");', () => {
+        describe('queryThumbnails("javascript");', () => {
 
           let javascript_results;
           before(() => {
@@ -149,6 +149,41 @@ if (!(typeof MochaWeb === 'undefined')){
           // this may fail if result change
           it('should return the exact top result', () =>{
             expect(javascript_result).to.be.equal('ANd9GcReV5JLtAkhBg_8nb1X3Hwmgz79xD12Yho2EADgq0MyWz9N-qqza1lPb81z');
+          });
+        });
+
+      });
+
+      describe('getTopThumbnail( query:String ):StringURL [static method]', () => {
+
+        describe('getTopThumbnail("node js");', () => {
+
+          let node_js_result;
+          before(() => {
+            node_js_result = GoogleFu.Image.getTopThumbnail("node js");
+          });
+
+          it('should return a string', () => {
+            expect(node_js_result).to.be.an.instanceof(String);
+          });
+
+          // this may fail if result change
+          it('should return the exact top result', () =>{
+            expect(node_js_result).to.be.equal('http://t1.gstatic.com/images?q=tbn:ANd9GcRjywSMf0DDvBI1paHhKcXQ91SxTZBe7kd48qLwC3KO2Z09S3kIXZpANQdU');
+          });
+
+        });
+
+        describe('getTopThumbnail("javascript");', () => {
+
+          let javascript_result;
+          before(() => {
+            javascript_result = GoogleFu.Image.getTopThumbnail("javascript");
+          });
+
+          // this may fail if result change
+          it('should return the exact top result', () =>{
+            expect(javascript_result).to.be.equal('http://t1.gstatic.com/images?q=tbn:ANd9GcReV5JLtAkhBg_8nb1X3Hwmgz79xD12Yho2EADgq0MyWz9N-qqza1lPb81z');
           });
         });
 
