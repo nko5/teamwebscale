@@ -9,7 +9,12 @@
   },
   "scripts": {
     "start": "node app.js",
-    "postinstall": "node scripts/postinstall.js"
+    "postinstall": "node scripts/postinstall.js",
+    "test": "mocha",
+    "dev": "mocha -w"
+  },
+  "devDependencies": {
+    "code": "^2.0.1",
+    "mocha": "^2.3.3"
   }
-
 }
