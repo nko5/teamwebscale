@@ -10,8 +10,8 @@
   "scripts": {
     "start": "cd app && meteor --settings settings.json",
     "postinstall": "node scripts/postinstall.js",
-    "test": "mocha",
-    "dev": "mocha -w"
+    "test": "mocha app/tests/mocha/*",
+    "dev": "mocha -w app/tests/mocha/*"
   },
   "devDependencies": {
     "code": "^2.0.1",
