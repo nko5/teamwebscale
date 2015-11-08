@@ -51,6 +51,15 @@ Schemas.Game = new SimpleSchema({
   rounds: {
     type: [Object],
     optional: true
+  },
+  "rounds.$.image": {
+    type: String
+  },
+  "rounds.$.correctAnswer": {
+    type:String
+  },
+  "rounds.$.results": {
+    type:[Object]
   }
 });
 

@@ -81,11 +81,18 @@ GoogleFu.GameController = (function(){
     let serverip = GoogleFu.IP.getAddress();
     let randomQuery = GoogleFu.Query.random();
     Meteor.call('GoogleFu.Image.getTopThumbnail', serverip, randomQuery, (err, topResultThumbnail) => {
+      let firstRoundObject = {'image': topResultThumbnail, 
+                              'correctAnswer': randomQuery,
+                              'results': []
+                              };
+
       Games.update({_id: gameId},
-                    {$set: {
-                      status: GoogleFu.Constants.GAME_STARTED,
-                      currentImage : topResultThumbnail,
-                      currentQuery : randomQuery
+                    {
+                      $push: {rounds: firstRoundObject},
+                      $set: {
+                        status: GoogleFu.Constants.GAME_STARTED,
+                        currentImage : topResultThumbnail,
+                        currentQuery : randomQuery
                     }}
                     , (err, result) => {
                       if(err) return done(err);
