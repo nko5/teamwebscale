@@ -29,9 +29,9 @@ GameCenter = React.createClass({
     let currentImage;
     let currentRound;
     if(this.data.game){
-      console.log(this.data.game.currentImage);
+      console.log(this.data.game);
       currentImage = this.data.game.currentImage;
-      currentRound = this.data.game.round;
+      currentRound = this.data.game.rounds.length;
     }
     let questionBGimgStyle = {
       backgroundImage : `url('${ currentImage }')`
