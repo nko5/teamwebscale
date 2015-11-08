@@ -16,7 +16,7 @@ GameLobby = React.createClass({
           throw new Meteor.Error(err);
         }
 
-        FlowRouter.go('/public/play/' + FlowRouter.getParam('id'));
+        FlowRouter.go('/play/' + FlowRouter.getParam('id'));
       });
   },
 
@@ -29,7 +29,7 @@ GameLobby = React.createClass({
     let game = this.data.games.map((game) => {
       return <GamePlayers key={game._id} game={game} />
     });
-    
+
     return (
       <div className="home">
         <h1>Public Game</h1>
