@@ -42,15 +42,24 @@ Schemas.Game = new SimpleSchema({
   },
   currentImage: {
     type: String,
-    optional: true
-  },
-  round: {
-    type: Number,
-    optional: true
+    optional:true
   },
   currentQuery: {
     type: String,
+    optional:true
+  },
+  rounds: {
+    type: [Object],
     optional: true
+  },
+  "rounds.$.image": {
+    type: String
+  },
+  "rounds.$.correctAnswer": {
+    type:String
+  },
+  "rounds.$.results": {
+    type:[Object]
   }
 });
 
