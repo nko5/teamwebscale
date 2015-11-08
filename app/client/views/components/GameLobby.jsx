@@ -24,12 +24,23 @@ GameLobby = React.createClass({
 
   },
 
+  componentWillUnmount() {
+    Session.set('title', null);
+  },
+
   render() {
     let currentGame = this.data.games[0];
     let gameTitle;
 
     if (currentGame) {
       gameTitle = currentGame.title;
+      let isPrivate = (currentGame.type == GoogleFu.Constants.PRIVATE_GAME);
+
+      if (isPrivate) {
+        Session.set('title', 'Private Game Lobby');
+      } else {
+        Session.set('title', 'Public Game Lobby');
+      }
     }
 
     let players = this.data.games.map((game) => {
