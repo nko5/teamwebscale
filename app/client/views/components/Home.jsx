@@ -3,7 +3,7 @@ Home = React.createClass({
     FlowRouter.go('/private/new');
   },
 
-  _createPrivateGame() {
+  _createPublicGame() {
     FlowRouter.go('/public/new');
   },
 
