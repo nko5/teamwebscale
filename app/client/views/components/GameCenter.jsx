@@ -3,9 +3,9 @@ GameCenter = React.createClass({
 
   getMeteorData() {
     return {
-      game : Games.find({
+      game : Games.findOne({
         _id: FlowRouter.getParam('id')
-      }).fetch()
+      })
     }
   },
 
@@ -15,13 +15,20 @@ GameCenter = React.createClass({
 
   render() {
     let timeRemaining = 0;
+    let currentImage;
+    let currentRound;
+    if(this.data.game){
+      console.log(this.data.game.currentImage);
+      currentImage = this.data.game.currentImage;
+      currentRound = this.data.game.round;
+    }
     let questionBGimgStyle = {
-      backgroundImage : `url('${ this.data.game.currentImage }')`
+      backgroundImage : `url('${ currentImage }')`
     };
 
     return (
       <div className="game-play container">
-        <h1>{ this.data.game.round } <span className="time-remaining">{ timeRemaining }</span></h1>
+        <h1>{ currentRound } <span className="time-remaining">{ timeRemaining }</span></h1>
         <div className="question-image" style={ questionBGimgStyle }></div>
         <input type="text" name="playerAnswer" />
         <button type="button" onClick={this._search}>Search</button>
