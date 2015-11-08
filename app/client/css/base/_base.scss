@@ -23,4 +23,11 @@ body {
     display: block;
     width: 100%;
   }
+  small {
+    color: darken($white, 25%);
+  }
+}
+
+input, textarea, keygen, select, button {
+  font-family: inherit;
 }

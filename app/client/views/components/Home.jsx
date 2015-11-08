@@ -25,10 +25,14 @@ Home = React.createClass({
             <small>Version 1.0</small>
           </h1>
 
-          <button onClick={this._createPrivateGame}>Create a Private Game</button>
-          <button onClick={this._joinPublicGame}>Join a Private Game</button>
-          <button onClick={this._createPublicGame}>Create a Public Game</button>
-          <button onClick={this._joinPrivateGame}>Join a Public Game</button>
+          <div className="private__buttons">
+            <button className="button button--green" onClick={this._createPrivateGame}>Create a Private Game</button>
+            <button className="button button--green" onClick={this._joinPrivateGame}>Join a Private Game</button>
+          </div>
+          <div className="public__buttons">
+            <button className="button button--blue" onClick={this._createPublicGame}>Create a Public Game</button>
+            <button className="button button--blue" onClick={this._joinPublicGame}>Join a Public Game</button>
+          </div>
         </div>
       </div>
     )
