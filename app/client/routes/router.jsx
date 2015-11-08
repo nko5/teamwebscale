@@ -24,14 +24,20 @@ FlowRouter.route('/private/new', {
 
 FlowRouter.route('/private/join', {
   action() {
-    ReactLayout.render(MainLayout, { content: <JoinPrivateGame /> });
+    ReactLayout.render(MainLayout, {
+      content: <JoinPrivateGame />,
+      title: 'Join a Private Game'
+    });
   }
 });
 
 
 FlowRouter.route('/public/join', {
   action() {
-    ReactLayout.render(MainLayout, { content: <JoinPublicGame /> });
+    ReactLayout.render(MainLayout, {
+      content: <JoinPublicGame />,
+      title: 'Join a Public Game'
+    });
   },
   subscriptions(params, queryParams) {
     this.register('joinPublicGames', Meteor.subscribe('joinPublicGames'));
