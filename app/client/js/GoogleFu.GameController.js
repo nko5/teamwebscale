@@ -73,6 +73,29 @@ GoogleFu.GameController = (function(){
     );
   }
 
+  function removePlayer(gameId, userId, done){
+    if(!gameId){
+      throw new Meteor.Error('Invalid Game Id');
+    } 
+
+    Games.update({_id: gameId},
+                  {
+                    $pull: {
+                      players: {$in: [userId]}
+                    }
+                  }
+                  , (err, result) => {
+                    console.log(err, result);
+                    if(err) return done(err);
+
+                    done(null, result);
+                  });
+  }
+
+  function leaveGame(gameId, done){
+    removePlayer(gameId, Meteor.userId(), done);
+  }
+
   function startGame(gameId, done){
     if(!gameId){
       throw new Meteor.Error('Invalid Game Id');
@@ -141,6 +164,8 @@ GoogleFu.GameController = (function(){
     createPublicGame: createPublicGame,
     createPrivateGame: createPrivateGame,
     joinGame: joinGame,
+    leaveGame: leaveGame,
+    removePlayer: removePlayer,
     startGame: startGame,
     savePlayerAnswer: savePlayerAnswer
   }
