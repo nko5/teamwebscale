@@ -16,6 +16,9 @@
   &--blue {
     background: $blue;
   }
+  &--gray {
+    background: darken($white, 40%);
+  }
 }
 
 .private__buttons {

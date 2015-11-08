@@ -25,16 +25,28 @@ GameLobby = React.createClass({
   },
 
   render() {
+    let currentGame = this.data.games[0];
+    let gameTitle;
 
-    let game = this.data.games.map((game) => {
+    if (currentGame) {
+      gameTitle = currentGame.title;
+    }
+
+    let players = this.data.games.map((game) => {
       return <GamePlayers key={game._id} game={game} />
     });
 
     return (
-      <div className="home">
-        <button onClick={this._startGame}>Start Game</button>
-        <button onClick={this._leaveGame}>Leave Game</button>
-        {game}
+      <div className="game-lobby">
+        <div className="container">
+          <h3>
+            {gameTitle}
+            <small>Waiting for people to join...</small>
+          </h3>
+          {players}
+          <button className="button button--blue" onClick={this._startGame}>Start Game</button>
+          <button className="button button--gray" onClick={this._leaveGame}>Leave Game</button>
+        </div>
       </div>
     )
   }
@@ -55,9 +67,9 @@ GamePlayers = React.createClass({
     });
 
     return (
-         <ul>
-          {players}
-        </ul>
+      <ol className="players-list" >
+        {players}
+      </ol>
     )
   }
 });
@@ -68,9 +80,18 @@ Player = React.createClass({
     // We can use propTypes to indicate it is required
     player: React.PropTypes.object.isRequired
   },
+
+  _removePlayer() {
+    // remove player here
+    console.log('bye bye ' + this.props.player.profile.name);
+  },
+
   render() {
     return (
-      <li>{this.props.player.profile.name}</li>
+      <li className="players-list__item">
+        {this.props.player.profile.name}
+        <a href="#" className="close-icon close-icon--gray hide-text" onClick={this._removePlayer}>Dismiss</a>
+      </li>
     );
   }
 });

@@ -1,4 +1,10 @@
 h3 {
   @include font-size(21px);
   margin-bottom: 3vh;
+  line-height: rem(24px);
+  small {
+    @include font-size(14px);
+    display: block;
+    color: darken($white, 25%);
+  }
 }
