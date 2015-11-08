@@ -10,8 +10,15 @@ GameResults = React.createClass({
     };
   },
 
-  _continue(event){
+  _continueNextRound(){
+    GoogleFu.GameController.startGame(FlowRouter.getParam('id'),
+      (err, result) => {
+        if(err) {
+          throw new Meteor.Error(err);
+        }
 
+        FlowRouter.go('/play/' + FlowRouter.getParam('id'));
+      });
   },
 
 
@@ -88,7 +95,7 @@ GameResults = React.createClass({
         <ul className="question-answer-list">
           { playerResults }
         </ul>
-        <button type="button" onClick={this._continue} style={nextRoundStyles}>Next Round</button>
+        <button type="button" onClick={this._continueNextRound} style={nextRoundStyles}>Next Round</button>
       </div>
     )
   }
