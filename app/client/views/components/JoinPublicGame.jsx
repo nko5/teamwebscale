@@ -10,14 +10,31 @@ JoinPublicGame = React.createClass({
     }
   },
 
+  getInitialState() {
+    return {
+      warning : null
+    };
+  },
+
+  onChildChanged(newState) {
+    this.setState({ warning : newState });
+  },
+
+  _resetError(event){
+    this.setState({ warning : null });
+  },
+
   render() {
     let games = this.data.games.map((game) => {
-      return <Game key={game._id} game={game} userName={this.refs.userName} />;
+      return <Game key={game._id} game={game} userName={this.refs.userName} callbackParent={this.onChildChanged} />;
     });
+
+    let warningTag = (this.state.warning)? <p className="warning">{ this.state.warning }</p> : '';
 
     return (
       <div className="join-game container">
-        <input ref="userName" placeholder="What is your name?"/>
+        { warningTag }
+        <input ref="userName" placeholder="What is your name?" onChange={this._resetError} />
         <h3>Choose a Room</h3>
         <ul className="rooms">
           {games}
@@ -37,6 +54,12 @@ Game = React.createClass({
 
   _joinGame() {
     let userName = this.props.userName.value.trim();
+
+    if(!userName){
+      // display error message
+      this.props.callbackParent('Enter your name!');
+      return;
+    }
 
     GoogleFu.GameController.joinGame(this.props.game._id, userName, (err, result) => {
       if(err) throw new Meteor.Error(err);
