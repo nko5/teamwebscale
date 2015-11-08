@@ -19,5 +19,5 @@ Meteor.publish('game', function(gameId){
 
 Meteor.publish('gamePlayers', function(gameId){
   let players = Games.findOne({_id: gameId}).players;
-  return Meteor.users.find({_id: {$in: players}});
+  return Meteor.users.find({},{_id: 1, profile: 1});
 });
