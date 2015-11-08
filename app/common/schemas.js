@@ -52,6 +52,25 @@ Schemas.Game = new SimpleSchema({
     type: Number,
     defaultValue: 0
   },
+  answers: {
+    type:[Object],
+    optional: true
+  },
+  "answers.$.round": {
+    type: Number
+  },
+  "answer.$.user": {
+    type: String
+  },
+  "answer.$.image": {
+    type: String 
+  },
+  "answer.$.guess":{
+    type: String
+  },
+  "answer.$.points": {
+    type: Number
+  },
   rounds: {
     type: [Object],
     optional: true
@@ -61,24 +80,6 @@ Schemas.Game = new SimpleSchema({
   },
   "rounds.$.correctAnswer": {
     type:String
-  },
-  "rounds.$.results": {
-    type:[Schemas.UserResult],
-    optional:true,
-    blackbox: true
-  }
-});
-
-Schemas.UserResult = new SimpleSchema({
-  userId: {
-    type: String
-  },
-  guess: {
-    type: String
-  },
-  points: {
-    type: Number,
-    optional: true
   }
 });
 
