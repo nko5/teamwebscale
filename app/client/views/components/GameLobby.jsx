@@ -10,6 +10,14 @@ GameLobby = React.createClass({
   },
 
   _startGame() {
+    GoogleFu.GameController.startGame(FlowRouter.getParam('id'),
+      (err, result) => {
+        if(err) {
+          throw new Meteor.Error(err);
+        }
+
+        FlowRouter.go('/public/play/' + FlowRouter.getParam('id'));
+      });
   },
 
   _leaveGame() {
@@ -26,6 +34,7 @@ GameLobby = React.createClass({
       <div className="home">
         <h1>Public Game</h1>
         <button onClick={this._startGame}>Start Game</button>
+        <button onClick={this._leaveGame}>Leave Game</button>
         {game}
       </div>
     )

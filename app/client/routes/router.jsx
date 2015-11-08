@@ -31,7 +31,6 @@ FlowRouter.route('/private/join', {
   }
 });
 
-
 FlowRouter.route('/public/join', {
   action() {
     ReactLayout.render(MainLayout, {
@@ -47,6 +46,16 @@ FlowRouter.route('/public/join', {
 FlowRouter.route('/public/lobby/:id', {
   action() {
     ReactLayout.render(MainLayout, {content: <GameLobby />});
+  },
+  subscriptions(params, queryParams) {
+    this.register('game', Meteor.subscribe('game', params.id));
+    this.register('gamePlayers', Meteor.subscribe('gamePlayers', params.id));
+  }
+});
+
+FlowRouter.route('/public/play/:id', {
+  action() {
+    ReactLayout.render(MainLayout, {content: <GameCenter />});
   },
   subscriptions(params, queryParams) {
     this.register('game', Meteor.subscribe('game', params.id));

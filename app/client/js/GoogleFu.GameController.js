@@ -81,9 +81,24 @@ GoogleFu.GameController = (function(){
     );
   }
 
+  function startGame(gameId, done){
+    if(!gameId){
+      throw new Meteor.Error('Invalid Game Id');
+    }
+
+    Games.update({_id: gameId},
+                  {$set: {status: GoogleFu.Constants.GAME_STARTED}}
+                  , (err, result) => {
+                    if(err) return done(err);
+
+                    done(null, result);
+                  });
+  }
+
   return {
     createPublicGame: createPublicGame,
     createPrivateGame: createPrivateGame,
-    joinGame: joinGame
+    joinGame: joinGame,
+    startGame: startGame
   }
 })();
