@@ -1,0 +1,25 @@
+.results-header {
+  margin-bottom: 20px;
+  border-bottom: 1px solid darken($white, 20%);
+}
+
+.tiny-question-image {
+  width: 60px;
+  height: 60px;
+  float: right;
+  box-shadow: 0 2px 3px 1px rgba($black, 0.4);
+}
+
+.game-result-round {
+  padding-top: 15px;
+  float: left;
+}
+
+.player-result-words {
+  padding-top: 18px;
+  float: left;
+}
+
+.player-result-icons {
+  float: right;
+}

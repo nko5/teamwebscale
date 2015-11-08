@@ -67,8 +67,7 @@ GameResults = React.createClass({
     if(this.data.game){
 
       this._handleRoundBumping();
-
-      currentImage = this.data.game.currentImage;
+      currentImage = this.data.game.currentImage.url;
       currentRound = this.data.game.rounds.length;
       this.data.results = this.data.game.players.map( playerId => {
         return Meteor.users.findOne({ _id : playerId });
@@ -113,12 +112,14 @@ GameResults = React.createClass({
 
     return (
       <div className="game-results container">
-        <h1 className="game-result-round">Round { currentRound }</h1>
-        <div className="question-image tiny-question-image" style={ questionBGimgStyle }></div>
+        <div className="results-header row">
+          <h3 className="game-result-round">Round { currentRound }</h3>
+          <div className="question-image tiny-question-image" style={ questionBGimgStyle }></div>
+        </div>
         <ul className="question-answer-list">
           { playerResults }
         </ul>
-        <button type="button" onClick={this._continueNextRound} style={nextRoundStyles}>Next Round</button>
+        <button className="button button--blue" type="button" onClick={this._continueNextRound} style={nextRoundStyles}>Next Round</button>
       </div>
     )
   }
@@ -138,13 +139,17 @@ PlayerResult = React.createClass({
 
     return (
       <li className="player-result">
-        <div className="player-result-words">
-          <h4 className="player-result-name">{this.props.player.profile.name}</h4>
-          <p className="player-answer">{this.props.player.guessDisplay}</p>
-        </div>
-        <div className="player-result-icons">
-          <span className={answerResultStatusClass}>{this.props.player.points}</span>
-          <span className="player-result-image-thumbnail" style={thumbnailStyle}></span>
+        <div className="row">
+          <div className="player-result-words">
+            <h3 className="player-result-name">
+              {this.props.player.profile.name} {(this.props.player.points !== null) ? '(' + this.props.player.points + ')' : ''}
+              <small className="player-answer">{this.props.player.guessDisplay}</small>
+            </h3>
+          </div>
+          <div className="player-result-icons">
+            <span className={answerResultStatusClass}></span>
+            <span className="tiny-question-image player-result-image-thumbnail" style={thumbnailStyle}></span>
+          </div>
         </div>
       </li>
     )

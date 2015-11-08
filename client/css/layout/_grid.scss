@@ -26,3 +26,7 @@
   margin: 0 auto;
   padding: 3vh 20px;
 }
+
+.row {
+  @include cf;
+}
