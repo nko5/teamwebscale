@@ -68,7 +68,7 @@ GoogleFu.GameController = (function(){
 
    Meteor.users.update(
       {_id: Meteor.userId()}, 
-      {$set:{'profile.name': name}},
+      {$set:{'profile.name': userName}},
       (err, result) => {
         Games.update({_id: gameId},
                     {$push: {players: Meteor.userId()}}
