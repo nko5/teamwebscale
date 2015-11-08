@@ -24,12 +24,25 @@ JoinPublicGame = React.createClass({
     this.setState({ warning : null });
   },
 
+  _createPublicGame() {
+    FlowRouter.go('/public/new');
+  },
+
   render() {
     let games = this.data.games.map((game) => {
       return <Game key={game._id} game={game} userName={this.refs.userName} callbackParent={this.onChildChanged} />;
     });
 
     let warningTag = (this.state.warning)? <p className="warning">{ this.state.warning }</p> : '';
+
+    if (!this.data.games.length) {
+      return (
+        <div className="join-game container">
+          <h3 className="text-center">All games are currently in progress.</h3>
+          <button className="button button--blue" onClick={this._createPublicGame}>Create a new Game</button>
+        </div>
+      )
+    }
 
     return (
       <div className="join-game container">

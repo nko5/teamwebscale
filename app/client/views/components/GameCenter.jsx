@@ -12,7 +12,7 @@ GameCenter = React.createClass({
   _search() {
     let guess = ReactDOM.findDOMNode(this.refs.playerAnswer).value.trim();
     if(guess.length > 0){
-      
+
       GoogleFu.GameController.savePlayerAnswer(FlowRouter.getParam('id'), Meteor.userId(), guess, (err, result) => {
         console.log(err, result);
         if(err){
@@ -29,9 +29,9 @@ GameCenter = React.createClass({
     let currentImage;
     let currentRound;
     if(this.data.game){
-      console.log(this.data.game.currentImage);
+      console.log(this.data.game);
       currentImage = this.data.game.currentImage;
-      currentRound = this.data.game.round;
+      currentRound = this.data.game.rounds.length;
     }
     let questionBGimgStyle = {
       backgroundImage : `url('${ currentImage }')`
@@ -39,10 +39,10 @@ GameCenter = React.createClass({
 
     return (
       <div className="game-play container">
-        <h1>{ currentRound } <span className="time-remaining">{ timeRemaining }</span></h1>
+        <h3>Round { currentRound } <span className="time-remaining">{ timeRemaining }</span></h3>
         <div className="question-image" style={ questionBGimgStyle }></div>
-        <input type="text" ref="playerAnswer" />
-        <button type="button" onClick={this._search}>Search</button>
+        <textarea rows="3" ref="playerAnswer" placeholder="What would you Google to get this as your #1 image result?"></textarea>
+        <button className="button button--blue" type="button" onClick={this._search}>Search</button>
       </div>
     )
   }
