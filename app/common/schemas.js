@@ -48,6 +48,10 @@ Schemas.Game = new SimpleSchema({
     type: String,
     optional:true
   },
+  currentRound: {
+    type: Number,
+    defaultValue: 0
+  },
   rounds: {
     type: [Object],
     optional: true
@@ -59,7 +63,22 @@ Schemas.Game = new SimpleSchema({
     type:String
   },
   "rounds.$.results": {
-    type:[Object]
+    type:[Schemas.UserResult],
+    optional:true,
+    blackbox: true
+  }
+});
+
+Schemas.UserResult = new SimpleSchema({
+  userId: {
+    type: String
+  },
+  guess: {
+    type: String
+  },
+  points: {
+    type: Number,
+    optional: true
   }
 });
 

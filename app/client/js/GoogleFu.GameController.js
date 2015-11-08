@@ -103,10 +103,39 @@ GoogleFu.GameController = (function(){
 
   }
 
+  function savePlayerAnswer(gameId, userId, answer, done){
+    if(!gameId){
+      throw new Meteor.Error('Invalid Game Id');
+    }
+
+    let currentRound = Games.findOne({_id: gameId}).currentRound;
+    let currentUserResult = {'userId': userId,
+                              'guess': answer,
+                              'points': 0
+                           };
+
+    Games.update({_id: gameId},
+      {
+        $push: {
+          'rounds.results': {
+            $each: [currentUserResult],
+            $position: currentRound
+          }
+        }
+      },
+      {validate: false}
+      , (err, result) => {
+        if(err) return done(err);
+
+        done(null, result);
+      });
+  }
+
   return {
     createPublicGame: createPublicGame,
     createPrivateGame: createPrivateGame,
     joinGame: joinGame,
-    startGame: startGame
+    startGame: startGame,
+    savePlayerAnswer: savePlayerAnswer
   }
 })();
