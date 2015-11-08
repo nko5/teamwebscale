@@ -41,7 +41,7 @@ Schemas.Game = new SimpleSchema({
     defaultValue: GoogleFu.Constants.GAME_PENDING
   },
   currentImage: {
-    type: String,
+    type: Object,
     optional:true
   },
   currentQuery: {
@@ -63,7 +63,7 @@ Schemas.Game = new SimpleSchema({
     type: String
   },
   "answers.$.image": {
-    type: String 
+    type: String
   },
   "answers.$.guess":{
     type: String

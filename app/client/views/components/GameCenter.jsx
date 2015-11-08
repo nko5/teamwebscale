@@ -6,7 +6,7 @@ GameCenter = React.createClass({
       game : Games.findOne({
         _id: FlowRouter.getParam('id')
       })
-    }
+    };
   },
 
   _search() {
@@ -29,9 +29,8 @@ GameCenter = React.createClass({
     let currentImage;
     let currentRound;
     if(this.data.game){
-      console.log(this.data.game);
-      currentImage = this.data.game.currentImage;
       currentRound = this.data.game.rounds.length;
+      currentImage = this.data.game.rounds[currentRound-1].image;
     }
     let questionBGimgStyle = {
       backgroundImage : `url('${ currentImage }')`
