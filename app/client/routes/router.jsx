@@ -28,6 +28,9 @@ FlowRouter.route('/private/join', {
       content: <JoinPrivateGame />,
       title: 'Join a Private Game'
     });
+  },
+  subscriptions(params, queryParams) {
+    this.register('joinPrivateGames', Meteor.subscribe('joinPrivateGames'));
   }
 });
 

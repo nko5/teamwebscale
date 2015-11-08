@@ -5,6 +5,14 @@ Meteor.publish("joinPublicGames", function(){
               });
 });
 
+Meteor.publish("joinPrivateGames", function(){
+  return Games.find({
+    type: GoogleFu.Constants.PRIVATE_GAME,
+    status: GoogleFu.Constants.GAME_PENDING
+  },
+  {fields: {'code': 1, '_id': 1}});
+});
+
 Meteor.publish('game', function(gameId){
   return Games.find({_id: gameId});
 });

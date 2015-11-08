@@ -74,7 +74,7 @@ Game = React.createClass({
       return;
     }
 
-    GoogleFu.GameController.joinGame(this.props.game._id, userName, (err, result) => {
+    GoogleFu.GameController.joinPublicGame(this.props.game._id, userName, (err, result) => {
       if(err) throw new Meteor.Error(err);
 
       FlowRouter.go('/lobby/' + this.props.game._id);

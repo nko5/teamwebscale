@@ -53,12 +53,38 @@ GoogleFu.GameController = (function(){
     );
   }
 
-  function joinGame(gameId, userName, done){
-   if(!gameId || !Meteor.userId()){
-    throw new Meteor.Error('Invalid Params to Join Game');
-   }
+  function joinPublicGame(gameId, userName, done){
+    if(!gameId || !Meteor.userId()){
+     throw new Meteor.Error('Invalid Params to Join Game');
+    }
 
-   Meteor.users.update(
+    addUserToGame(gameId, userName, done);
+  }
+
+  function joinPrivateGame(userName, roomCode, done){
+    if(!roomCode || !Meteor.userId()){
+     throw new Meteor.Error('Invalid Params to Join Game');
+    }
+
+    var game = Games.findOne({code: roomCode});
+
+    if(!game){
+      done('Invalid Room Code');
+    }
+
+    addUserToGame(game._id, userName, (err, result) => {
+      if(err) return done(err);
+
+      done(null, game._id);
+    });
+  }
+
+  function addUserToGame(gameId, userName, done){
+    if(!gameId || !Meteor.userId()){
+      throw new Meteor.Error('Invalid Params to Join Game');
+    }
+
+    Meteor.users.update(
       {_id: Meteor.userId()},
       {$set:{'profile.name': userName}},
       (err, result) => {
@@ -163,7 +189,8 @@ GoogleFu.GameController = (function(){
   return {
     createPublicGame: createPublicGame,
     createPrivateGame: createPrivateGame,
-    joinGame: joinGame,
+    joinPublicGame: joinPublicGame,
+    joinPrivateGame: joinPrivateGame,
     leaveGame: leaveGame,
     removePlayer: removePlayer,
     startGame: startGame,

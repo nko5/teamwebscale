@@ -1,6 +1,22 @@
 JoinPrivateGame = React.createClass({
+  mixins: [ReactMeteorData],
+
+  getMeteorData() {
+    return {
+      games: Games.find({}).fetch()
+    }
+  },
+
   _joinGame() {
-    console.log('hallo');
+    let roomCode = ReactDOM.findDOMNode(this.refs.roomCode).value.trim();
+    let userName = ReactDOM.findDOMNode(this.refs.userName).value.trim();
+    GoogleFu.GameController.joinPrivateGame(userName, roomCode, (err, result) => {
+      if(err){
+        throw new Meteor.Error(err);
+      } 
+
+      FlowRouter.go('/lobby/' + result);
+    });
   },
 
   render() {
