@@ -5,5 +5,9 @@ Games.allow({
     }
 
     return true;
+  },
+
+  update: function(){
+    return true;
   }
 });
