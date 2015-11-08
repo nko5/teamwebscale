@@ -39,7 +39,10 @@ GameLobby = React.createClass({
     return (
       <div className="game-lobby">
         <div className="container">
-          <h3>{gameTitle}</h3>
+          <h3>
+            {gameTitle}
+            <small>Waiting for people to join...</small>
+          </h3>
           {players}
           <button className="button button--blue" onClick={this._startGame}>Start Game</button>
           <button className="button button--gray" onClick={this._leaveGame}>Leave Game</button>
