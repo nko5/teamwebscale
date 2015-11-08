@@ -9,6 +9,10 @@ GameCenter = React.createClass({
     }
   },
 
+  _search() {
+    FlowRouter.go('/results/' + FlowRouter.getParam('id'));
+  },
+
   render() {
     let timeRemaining = 0;
     let questionBGimgStyle = {
@@ -20,7 +24,7 @@ GameCenter = React.createClass({
         <h1>{ this.data.game.round } <span className="time-remaining">{ timeRemaining }</span></h1>
         <div className="question-image" style={ questionBGimgStyle }></div>
         <input type="text" name="playerAnswer" />
-        <button type="button">Search</button>
+        <button type="button" onClick={this._search}>Search</button>
       </div>
     )
   }

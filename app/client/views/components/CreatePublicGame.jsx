@@ -2,8 +2,6 @@ CreatePublicGame = React.createClass({
   _createGame() {
     let userName = ReactDOM.findDOMNode(this.refs.userName).value.trim();
     GoogleFu.GameController.createPublicGame(userName, (err, result)=>{
-
-      //clear form
       FlowRouter.go('/lobby/' + result);
     });
   },
