@@ -102,7 +102,7 @@ GoogleFu.GameController = (function(){
   function removePlayer(gameId, userId, done){
     if(!gameId){
       throw new Meteor.Error('Invalid Game Id');
-    } 
+    }
 
     Games.update({_id: gameId},
                   {
@@ -164,7 +164,7 @@ GoogleFu.GameController = (function(){
       Meteor.call('GoogleFu.Image.match', userip, currentGame.currentQuery, answer, (err, matches) => {
         let currentUserResult = {'user': userId,
                                   'guess': answer,
-                                  'points': 0,
+                                  'points': matches ? 1 : 0,
                                   'round': currentGame.currentRound,
                                   'image': topThumbnail.url,
                                   'correctAnswer': currentGame.currentQuery
