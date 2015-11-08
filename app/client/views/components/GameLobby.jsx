@@ -21,7 +21,18 @@ GameLobby = React.createClass({
   },
 
   _leaveGame() {
+    GoogleFu.GameController.leaveGame(FlowRouter.getParam('id'),
+      (err, result) => {
+        if(err){
+          throw new Meteor.Error(err);
+        } 
 
+        FlowRouter.go('/');
+      });
+  },
+
+  componentWillUnmount() {
+    Session.set('title', null);
   },
 
   render() {
@@ -30,6 +41,13 @@ GameLobby = React.createClass({
 
     if (currentGame) {
       gameTitle = currentGame.title;
+      let isPrivate = (currentGame.type == GoogleFu.Constants.PRIVATE_GAME);
+
+      if (isPrivate) {
+        Session.set('title', 'Private Game Lobby');
+      } else {
+        Session.set('title', 'Public Game Lobby');
+      }
     }
 
     let players = this.data.games.map((game) => {
@@ -63,7 +81,7 @@ GamePlayers = React.createClass({
 
   render() {
     let players = this.data.players.map((player) => {
-      return <Player key={player._id} player={player} />;
+      return <Player key={player._id} player={player} game={this.props.game} />;
     });
 
     return (
@@ -78,12 +96,19 @@ Player = React.createClass({
   propTypes: {
     // This component gets the task to display through a React prop.
     // We can use propTypes to indicate it is required
-    player: React.PropTypes.object.isRequired
+    player: React.PropTypes.object.isRequired,
+    game: React.PropTypes.object.isRequired
   },
 
   _removePlayer() {
     // remove player here
-    console.log('bye bye ' + this.props.player.profile.name);
+    GoogleFu.GameController.removePlayer(this.props.game._id, 
+      this.props.player._id, 
+      (err, result) => {
+        if(err){
+          throw new Meteor.Error(err);
+        }
+    })
   },
 
   render() {

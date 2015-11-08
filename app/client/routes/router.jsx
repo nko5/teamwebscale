@@ -48,7 +48,7 @@ FlowRouter.route('/lobby/:id', {
   action() {
     ReactLayout.render(MainLayout, {
       content: <GameLobby />,
-      title: 'Public Game'
+      title: 'Game Lobby'
     });
   },
   subscriptions(params, queryParams) {
