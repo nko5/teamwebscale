@@ -66,7 +66,7 @@ Game = React.createClass({
   },
 
   _joinGame() {
-    let userName = this.props.userName.value.trim();
+    let userName = this.props.userName ? this.props.userName.value.trim() : '';
 
     if(!userName){
       // display error message
