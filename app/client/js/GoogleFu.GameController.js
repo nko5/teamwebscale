@@ -102,7 +102,7 @@ GoogleFu.GameController = (function(){
   function removePlayer(gameId, userId, done){
     if(!gameId){
       throw new Meteor.Error('Invalid Game Id');
-    } 
+    }
 
     Games.update({_id: gameId},
                   {
@@ -130,7 +130,7 @@ GoogleFu.GameController = (function(){
     let serverip = GoogleFu.IP.getAddress();
     let randomQuery = GoogleFu.Query.random();
     Meteor.call('GoogleFu.Image.getTopThumbnail', serverip, randomQuery, (err, topResultThumbnail) => {
-      let firstRoundObject = {'image': topResultThumbnail.url,
+      let firstRoundObject = {'image': topResultThumbnail,
                               'correctAnswer': randomQuery
                               };
 

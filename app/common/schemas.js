@@ -44,6 +44,18 @@ Schemas.Game = new SimpleSchema({
     type: Object,
     optional:true
   },
+  'currentImage.url': {
+    type: String
+  },
+  'currentImage.dimensions': {
+    type: Object
+  },
+  'currentImage.dimensions.width': {
+    type: String
+  },
+  'currentImage.dimensions.height': {
+    type: String
+  },
   currentQuery: {
     type: String,
     optional:true
@@ -76,6 +88,18 @@ Schemas.Game = new SimpleSchema({
     optional: true
   },
   "rounds.$.image": {
+    type: Object
+  },
+  "rounds.$.image.url": {
+    type: String
+  },
+  "rounds.$.image.dimensions": {
+    type: Object
+  },
+  "rounds.$.image.dimensions.width": {
+    type: String
+  },
+  "rounds.$.image.dimensions.height": {
     type: String
   },
   "rounds.$.correctAnswer": {
