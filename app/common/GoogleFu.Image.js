@@ -37,6 +37,13 @@ GoogleFu.Image = (() => {
 
   class Image{
 
+    /*
+     * params:
+     *   - userip : String, requester's ip address
+     *   - q : String, google image search query
+     *
+     * returns Array<String>, 4 top image result ids
+     */
     static query(userip, q){
       let queryURL = generateUrl( GOOGLE_IMAGE_JSON_API_BASE_URL, {
         userip : userip,
