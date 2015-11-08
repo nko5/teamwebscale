@@ -32,3 +32,18 @@
     background: $red;
   }
 }
+
+.answer-correct {
+  @extend .close-icon;
+  top: 22px;
+  left: -18px;
+  &:before, &:after {
+    background: $green;
+  }
+  &:before {
+    top: 12px;
+    left: -3px;
+    width: 50%;
+    transform: rotate(45deg);
+  }
+}
