@@ -25,8 +25,13 @@ GameLobby = React.createClass({
   },
 
   render() {
+    let currentGame = this.data.games[0];
+    let gameTitle;
 
-    let game = this.data.games.map((game) => {
+    if (currentGame) {
+      gameTitle = currentGame.title;
+    }
+
       return <GamePlayers key={game._id} game={game} />
     });
 
@@ -35,6 +40,7 @@ GameLobby = React.createClass({
         <button onClick={this._startGame}>Start Game</button>
         <button onClick={this._leaveGame}>Leave Game</button>
         {game}
+          <h3>{gameTitle}</h3>
       </div>
     )
   }
