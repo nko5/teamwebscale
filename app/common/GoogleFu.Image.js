@@ -66,10 +66,29 @@ GoogleFu.Image = (() => {
      *   - userip : String, requester's ip address
      *   - q : String, google image search query
      *
-     * returns Array<String>, 4 top image thumbnail urls
+     * returns Array<{ url : String, dimensions : {width : Int, height : Int} }>, 4 top image thumbnail urls
      */
     static queryThumbnails(userip, q){
-      return Image.query(userip, q).map( imageId => `${GOOGLE_THUMBNAIL_URL}${imageId}` );
+      let result;
+      try{
+        result = HTTP.get( GOOGLE_IMAGE_JSON_API_BASE_URL, {
+          params : validateQueryParams({
+            userip : userip,
+            v : GOOGLE_IMAGE_JSON_API_VERSION,
+            q : q
+          })
+        });
+      }catch(error){
+        throw new Error(`Fatal Error in GoogleFu.Image : query(${q}) HTTP.get(); ${error}`);
+      }
+
+      return JSON.parse(result.content).responseData.results.map( image => ({
+        url: image.tbUrl,
+        dimensions : {
+          width : image.tbWidth,
+          height : image.tbHeight
+        }
+      }));
     }
 
     /*
@@ -88,7 +107,7 @@ GoogleFu.Image = (() => {
      *   - userip : String, requester's ip address
      *   - q : String, google image search query
      *
-     * returns String, top image thumbnail url
+     * returns { url : String, dimensions : {width : Int, height : Int} }, top image thumbnail image object
      */
     static getTopThumbnail(userip, q){
       return Image.queryThumbnails(userip, q)[0];

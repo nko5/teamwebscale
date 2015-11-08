@@ -24,7 +24,8 @@ if (!(typeof MochaWeb === 'undefined')){
         'ANd9GcS9U7YpJZv9SgjH8wzmN2bqSUGs9Jmqe0tROoX54pRyDoeznmlUe5TMxw2A',
         'ANd9GcS2hbGAdokH5nfQgEZLjiLdTfRhBL0QfulkV1TvoGGVRomwkk5qYeLPXj0',
         'ANd9GcRjywSMf0DDvBI1paHhKcXQ91SxTZBe7kd48qLwC3KO2Z09S3kIXZpANQdU',
-        'ANd9GcTy--ja2Cw-P68LpNitZ0C6RzH9R8SijWIgr13QJBc-nJ1iL4C4fkEt2w'
+        'ANd9GcTy--ja2Cw-P68LpNitZ0C6RzH9R8SijWIgr13QJBc-nJ1iL4C4fkEt2w',
+        'ANd9GcS2hbGAdokH5nfQgEZLjiLdTfRhBL0QfulkV1TvoGGVRomwkk5qYeLPXj0'
       ];
       const valid_javascript_results = [
         'ANd9GcReV5JLtAkhBg_8nb1X3Hwmgz79xD12Yho2EADgq0MyWz9N-qqza1lPb81z',
@@ -32,21 +33,6 @@ if (!(typeof MochaWeb === 'undefined')){
         'ANd9GcT_WDc0_gJu8xDAIFNkq0v6y2dbivRAix3EwKjlMQs0vscc-hCQO56Q3n4',
         'ANd9GcS4hcJfxmETO_-rLIyeUlGelFTvzf_o4ogyPbq5oXclPXYp5I0mKC_1YEUC',
         'ANd9GcTln9UztmWu2VtgsjdUGT_AkFh_jf83l4Y7CJMR0iVJxjrd9DsvAuHFZQ'
-      ];
-
-      const valid_node_js_thumbnail_results = [
-        'http://t1.gstatic.com/images?q=tbn:ANd9GcS9U7YpJZv9SgjH8wzmN2bqSUGs9Jmqe0tROoX54pRyDoeznmlUe5TMxw2A',
-        'http://t1.gstatic.com/images?q=tbn:ANd9GcS2hbGAdokH5nfQgEZLjiLdTfRhBL0QfulkV1TvoGGVRomwkk5qYeLPXj0',
-        'http://t1.gstatic.com/images?q=tbn:ANd9GcRjywSMf0DDvBI1paHhKcXQ91SxTZBe7kd48qLwC3KO2Z09S3kIXZpANQdU',
-        'http://t1.gstatic.com/images?q=tbn:ANd9GcTy--ja2Cw-P68LpNitZ0C6RzH9R8SijWIgr13QJBc-nJ1iL4C4fkEt2w'
-      ];
-
-      const valid_javascript_thumbnail_results = [
-        'http://t1.gstatic.com/images?q=tbn:ANd9GcReV5JLtAkhBg_8nb1X3Hwmgz79xD12Yho2EADgq0MyWz9N-qqza1lPb81z',
-        'http://t1.gstatic.com/images?q=tbn:ANd9GcTHsSKvO6DGUWbJUdhAbbeepUMYpBjY2ipMmCCQCi1LTZXSatLZOiuSUMM',
-        'http://t1.gstatic.com/images?q=tbn:ANd9GcT_WDc0_gJu8xDAIFNkq0v6y2dbivRAix3EwKjlMQs0vscc-hCQO56Q3n4',
-        'http://t1.gstatic.com/images?q=tbn:ANd9GcS4hcJfxmETO_-rLIyeUlGelFTvzf_o4ogyPbq5oXclPXYp5I0mKC_1YEUC',
-        'http://t1.gstatic.com/images?q=tbn:ANd9GcTln9UztmWu2VtgsjdUGT_AkFh_jf83l4Y7CJMR0iVJxjrd9DsvAuHFZQ'
       ];
 
       describe('query(userip:String, query:String, cb(result:Array<StringID>))', () => {
@@ -73,13 +59,6 @@ if (!(typeof MochaWeb === 'undefined')){
             });
           });
 
-          // this may fail if result change
-          it('should return the 4 results in any order', () =>{
-            node_js_results.forEach(function(result){
-              expect(valid_node_js_results).to.contain(result);
-            });
-          });
-
         });
 
         describe('query("javascript");', () => {
@@ -92,17 +71,10 @@ if (!(typeof MochaWeb === 'undefined')){
             });
           });
 
-          // this may fail if result change
-          it('should return the 4 results in any order', () =>{
-            javascript_results.forEach(function(result){
-              expect(valid_javascript_results).to.contain(result);
-            });
-          });
-
         });
       });
 
-      describe('queryThumbnails( query:String ):Array<StringURL> [static method]', () => {
+      describe('queryThumbnails( query:String ):Array<Image> [static method]', () => {
 
         describe('queryThumbnails("node js");', () => {
 
@@ -118,41 +90,16 @@ if (!(typeof MochaWeb === 'undefined')){
             expect(node_js_results).to.be.an.instanceof(Array);
           });
 
-          it('should return 4 string urls', () => {
+          it('should return 4 Image objects', () => {
             expect(node_js_results).to.have.length(4);
             node_js_results.forEach(function(result){
-              expect(result).to.be.a('string');
-              expect(result).to.match(urlEreg);
+              expect(result).to.be.an('object');
+              expect(result).to.have.property('url');
+              expect(result).to.have.property('dimensions');
+              expect(result.url).to.match(urlEreg);
             });
           });
 
-          // this may fail if result change
-          it('should return the 4 results in any order', () =>{
-            node_js_results.forEach(function(result){
-              expect(valid_node_js_thumbnail_results).to.contain(result);
-            });
-          });
-
-        });
-
-        describe('queryThumbnails("javascript");', () => {
-
-          let javascript_results;
-          before( done => {
-            Meteor.call('GoogleFu.Image.queryThumbnails', userip, "javascript", (err,result) => {
-              javascript_results = result;
-              done();
-            });
-          });
-
-          // this may fail if result change
-          it('should return the results in any order', () =>{
-
-            javascript_results.forEach(function(result){
-              expect(valid_javascript_thumbnail_results).to.contain(result);
-            });
-
-          });
         });
 
       });
@@ -189,16 +136,11 @@ if (!(typeof MochaWeb === 'undefined')){
               done();
             });
           });
-
-          // this may fail if result change
-          it('should return the exact top result', () =>{
-            expect(valid_javascript_results).to.contain(javascript_result);
-          });
         });
 
       });
 
-      describe('getTopThumbnail( query:String ):StringURL [static method]', () => {
+      describe('getTopThumbnail( query:String ):Image [static method]', () => {
 
         describe('getTopThumbnail("node js");', () => {
 
@@ -210,31 +152,12 @@ if (!(typeof MochaWeb === 'undefined')){
             });
           });
 
-          it('should return a string', () => {
-            expect(node_js_result).to.be.a('string');
+          it('should return an Image object', () => {
+            expect(node_js_result).to.be.an('object');
+            expect(node_js_result).to.have.property('url');
+            expect(node_js_result).to.have.property('dimensions');
           });
 
-          // this may fail if result change
-          it('should return the exact top result', () =>{
-            expect(valid_node_js_thumbnail_results).to.contain(node_js_result)
-          });
-
-        });
-
-        describe('getTopThumbnail("javascript");', () => {
-
-          let javascript_result;
-          before( done => {
-            Meteor.call('GoogleFu.Image.getTopThumbnail', userip, "javascript", (err,result) => {
-              javascript_result = result;
-              done();
-            });
-          });
-
-          // this may fail if result change
-          it('should return the exact top result', () =>{
-            expect(valid_javascript_thumbnail_results).to.contain(javascript_result);
-          });
         });
 
       });
