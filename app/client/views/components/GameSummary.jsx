@@ -11,7 +11,7 @@ GameSummary = React.createClass({
 
   _goHome() {
     FlowRouter.go('/');
-  }
+  },
 
   render() {
 
@@ -19,7 +19,7 @@ GameSummary = React.createClass({
       <div className="game-play container">
         <h1>Game Summary</h1>
         <button type="button" onClick={this._goHome}>Start Over</button>
-      </div>  
+      </div>
     );
   }
 });
