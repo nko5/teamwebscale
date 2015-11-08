@@ -45,7 +45,11 @@ GameResults = React.createClass({
       Session.set('gameRound', this.data.game.currentRound );
     }else if( this.data.game.currentRound > Session.get('gameRound') ){
       // round bumped, move everyone into next round
-      FlowRouter.go('/play/' + FlowRouter.getParam('id'));
+      if( this.data.game.currendRound > GoogleFu.Constants.SETTINGS.TOTAL_ROUNDS ){
+        FlowRouter.go('/summary/' + FlowRouter.getParam('id'));
+      }else{
+        FlowRouter.go('/play/' + FlowRouter.getParam('id'));
+      }
     }
 
   },
