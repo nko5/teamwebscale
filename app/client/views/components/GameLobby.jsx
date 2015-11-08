@@ -40,6 +40,10 @@ GameLobby = React.createClass({
     let gameTitle;
 
     if (currentGame) {
+      if(currentGame.status === GoogleFu.Constants.GAME_STARTED){
+        FlowRouter.go('/play/' + FlowRouter.getParam('id'));
+      }
+
       gameTitle = currentGame.title;
       let isPrivate = (currentGame.type == GoogleFu.Constants.PRIVATE_GAME);
 
