@@ -38,6 +38,21 @@ GameResults = React.createClass({
     return allSubmitted;
   },
 
+  _handleRoundBumping() {
+
+    if( Session.get('gameRound') == null ){
+      // initial setting
+      Session.set('gameRound', this.data.game.currentRound );
+    }else if( this.data.game.currentRound > Session.get('gameRound') ){
+      // round bumped, move everyone into next round
+      FlowRouter.go('/play/' + FlowRouter.getParam('id'));
+    }
+
+  },
+
+  componentWillUnmount() {
+    Session.set('gameRound', null);
+  },
 
   render() {
     let currentImage;
@@ -45,6 +60,8 @@ GameResults = React.createClass({
     let playerResults;
     let nextRoundStyles;
     if(this.data.game){
+
+      this._handleRoundBumping();
 
       currentImage = this.data.game.currentImage;
       currentRound = this.data.game.rounds.length;
