@@ -39,6 +39,18 @@ Schemas.Game = new SimpleSchema({
     type: Number,
     allowedValues: [GoogleFu.Constants.GAME_PENDING, GoogleFu.Constants.GAME_STARTED, GoogleFu.Constants.GAME_ENDED],
     defaultValue: GoogleFu.Constants.GAME_PENDING
+  },
+  currentImage: {
+    type: String,
+    optional:true
+  },
+  currentQuery: {
+    type: String,
+    optional:true
+  },
+  rounds: {
+    type: [Object],
+    optional: true
   }
 });
 
