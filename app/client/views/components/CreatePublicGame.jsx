@@ -4,7 +4,7 @@ CreatePublicGame = React.createClass({
     GoogleFu.GameController.createPublicGame(userName, (err, result)=>{
 
       //clear form
-      FlowRouter.go('/public/lobby/' + result);
+      FlowRouter.go('/lobby/' + result);
     });
   },
 
