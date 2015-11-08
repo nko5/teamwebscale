@@ -72,8 +72,15 @@ GoogleFu.Image = (() => {
       return Image.query(userip, q).map( imageId => `${GOOGLE_THUMBNAIL_URL}${imageId}` );
     }
 
-    static getTop(){
-      return false;
+    /*
+     * params:
+     *   - userip : String, requester's ip address
+     *   - q : String, google image search query
+     *
+     * returns String, top image id
+     */
+    static getTop(userip, q){
+      return Image.query(userip, q)[0];
     }
 
     static getTopThumbnail(){
