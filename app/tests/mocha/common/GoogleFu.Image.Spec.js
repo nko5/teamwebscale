@@ -1,8 +1,9 @@
 'use strict';
 
 /*global
-  MochaWeb
-  GoogleFu
+  Meteor,
+  MochaWeb,
+  GoogleFu,
   chai
 */
 
@@ -200,8 +201,11 @@ if (!(typeof MochaWeb === 'undefined')){
         describe('getTopThumbnail("node js");', () => {
 
           let node_js_result;
-          before(() => {
-            node_js_result = GoogleFu.Image.getTopThumbnail("node js");
+          before( done => {
+            Meteor.call('GoogleFu.Image.getTopThumbnail', userip, "node js", (err,result) => {
+              node_js_result = result;
+              done();
+            });
           });
 
           it('should return a string', () => {
@@ -210,7 +214,7 @@ if (!(typeof MochaWeb === 'undefined')){
 
           // this may fail if result change
           it('should return the exact top result', () =>{
-            expect(node_js_result).to.be.equal('http://t1.gstatic.com/images?q=tbn:ANd9GcRjywSMf0DDvBI1paHhKcXQ91SxTZBe7kd48qLwC3KO2Z09S3kIXZpANQdU');
+            expect(valid_node_js_thumbnail_results).to.contain(node_js_result)
           });
 
         });
@@ -218,13 +222,16 @@ if (!(typeof MochaWeb === 'undefined')){
         describe('getTopThumbnail("javascript");', () => {
 
           let javascript_result;
-          before(() => {
-            javascript_result = GoogleFu.Image.getTopThumbnail("javascript");
+          before( done => {
+            Meteor.call('GoogleFu.Image.getTopThumbnail', userip, "javascript", (err,result) => {
+              javascript_result = result;
+              done();
+            });
           });
 
           // this may fail if result change
           it('should return the exact top result', () =>{
-            expect(javascript_result).to.be.equal('http://t1.gstatic.com/images?q=tbn:ANd9GcReV5JLtAkhBg_8nb1X3Hwmgz79xD12Yho2EADgq0MyWz9N-qqza1lPb81z');
+            expect(valid_javascript_thumbnail_results).to.contain(javascript_result);
           });
         });
 
