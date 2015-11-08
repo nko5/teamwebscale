@@ -9,7 +9,8 @@ GoogleFu.GameController = (function(){
     Games.insert({
       title: title, 
       type: type, 
-      code: code, 
+      code: code,
+      status: GoogleFu.Constants.GAME_PENDING, 
       players: [userId]
     }, (err, result) => {
       if(err) return done(err);

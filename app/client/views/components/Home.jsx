@@ -3,7 +3,7 @@ Home = React.createClass({
     FlowRouter.go('/private/new');
   },
 
-  _createPrivateGame() {
+  _createPublicGame() {
     FlowRouter.go('/public/new');
   },
 
@@ -21,9 +21,9 @@ Home = React.createClass({
       <div className="home">
         <h1>Google Fu</h1>
         <button onClick={this._createPrivateGame}>Create a Private Game</button>
-        <button onClick={this._joinPublicGame}>Join a Private Game</button>
+        <button onClick={this._joinPrivateGame}>Join a Private Game</button>
         <button onClick={this._createPublicGame}>Create a Public Game</button>
-        <button onClick={this._joinPrivateGame}>Join a Public Game</button>
+        <button onClick={this._joinPublicGame}>Join a Public Game</button>
       </div>
     )
   }
