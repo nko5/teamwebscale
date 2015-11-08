@@ -32,7 +32,9 @@ GameResults = React.createClass({
       <div className="game-results container">
         <h1>{ currentRound }</h1>
         <div className="question-image tiny-question-image" style={ questionBGimgStyle }></div>
-        { results }
+        <ul className="question-answer-list">
+          { results }
+        </ul>
         <button type="button" onClick={this._continue}>Next Round</button>
       </div>
     )
