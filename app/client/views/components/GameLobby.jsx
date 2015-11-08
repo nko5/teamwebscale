@@ -6,7 +6,6 @@ GameLobby = React.createClass({
       game:  Games.findOne({
                 _id: FlowRouter.getParam('id')
               })
-      // players: Meteor.users.find({_id: {$in: this.data.game.players}}).fetch()
     };
   },
 
@@ -38,6 +37,7 @@ GamePlayers = React.createClass({
 
   getMeteorData() {
     return {
+      game: Games.findOne({_id: this.props.game._id}),
       players: Meteor.users.find({_id: {$in: this.props.game.players}}).fetch()
     };
   },
