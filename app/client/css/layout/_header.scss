@@ -2,7 +2,7 @@ header {
   @include font-size(20px);
   position: relative;
   width: 100%;
-  padding: rem(20px);
+  padding: 20px;
   background: lighten($black, 30%);
   color: $white;
 }

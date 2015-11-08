@@ -2,8 +2,8 @@
   $size: rem(22px);
   display: block;
   position: absolute;
-  top: rem(20px);
-  right: rem(20px);
+  top: 20px;
+  right: 20px;
   width: $size;
   height: $size;
   &:before, &:after {
