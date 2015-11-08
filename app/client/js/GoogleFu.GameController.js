@@ -164,7 +164,7 @@ GoogleFu.GameController = (function(){
       Meteor.call('GoogleFu.Image.match', userip, currentGame.currentQuery, answer, (err, matches) => {
         let currentUserResult = {'user': userId,
                                   'guess': answer,
-                                  'points': 0,
+                                  'points': matches ? 1 : 0,
                                   'round': currentGame.currentRound,
                                   'image': topThumbnail.url,
                                   'correctAnswer': currentGame.currentQuery

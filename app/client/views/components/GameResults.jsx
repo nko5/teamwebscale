@@ -3,24 +3,52 @@ GameResults = React.createClass({
 
   getMeteorData() {
     return {
-       game : Games.findOne({
+      game : Games.findOne({
         _id: FlowRouter.getParam('id')
-      })
+      }),
+      results : []
+    };
+  },
+
+  _continueNextRound(){
+    GoogleFu.GameController.startGame(FlowRouter.getParam('id'),
+      (err, result) => {
+        if(err) {
+          throw new Meteor.Error(err);
+        }
+
+        FlowRouter.go('/play/' + FlowRouter.getParam('id'));
+      });
+  },
+
+
+  /*
+   * when all players submit
+   *   do scoring
+   */
+  _checkAllResults(){
+    let allSubmitted = this.data.game.answers.length == this.data.game.players.length;
+    if(allSubmitted){
+      // show all answers
+      this.data.results.forEach( result => {
+        result.guessDisplay = result.guess;
+
+      });
     }
+    return allSubmitted;
   },
 
-  _continue(event){
-
-  },
 
   render() {
     let currentImage;
     let currentRound;
-    let results;
+    let playerResults;
+    let nextRoundStyles;
     if(this.data.game){
+
       currentImage = this.data.game.currentImage;
       currentRound = this.data.game.rounds.length;
-      results = this.data.game.players.map( playerId => {
+      this.data.results = this.data.game.players.map( playerId => {
         return Meteor.users.findOne({ _id : playerId });
       }).map( player => {
         let playerAnswer = JSON.parse(JSON.stringify(player)); // clone
@@ -29,28 +57,45 @@ GameResults = React.createClass({
           // there's an answer, display it
 
           playerAnswer.guess = playerAnswers[0].guess;
+          playerAnswer.guessDisplay = 'done';
           playerAnswer.image = playerAnswers[0].image;
           playerAnswer.points = playerAnswers[0].points;
         }else{
-          playerAnswer.guess = 'still thinking...';
+          playerAnswer.guess = null;
+          playerAnswer.guessDisplay = 'still thinking...';
+          playerAnswer.image = null;
+          playerAnswer.points = null;
         }
         return playerAnswer;
-      }).map( (player, idx) => {
+      });
+
+      // update done/waiting statuses
+      let allResultsSubmitted = this._checkAllResults();
+
+      if(allResultsSubmitted){
+        nextRoundStyles = { display : 'block' };
+      }else{
+        nextRoundStyles = { display : 'none' };
+      }
+
+      playerResults = this.data.results.map( (player, idx) => {
         return <PlayerResult key={idx} player={player} />;
       });
     }
+
     let questionBGimgStyle = {
       backgroundImage : `url('${ currentImage }')`
     };
+
 
     return (
       <div className="game-results container">
         <h1 className="game-result-round">Round { currentRound }</h1>
         <div className="question-image tiny-question-image" style={ questionBGimgStyle }></div>
         <ul className="question-answer-list">
-          { results }
+          { playerResults }
         </ul>
-        <button type="button" onClick={this._continue}>Next Round</button>
+        <button type="button" onClick={this._continueNextRound} style={nextRoundStyles}>Next Round</button>
       </div>
     )
   }
@@ -70,7 +115,7 @@ PlayerResult = React.createClass({
       <li className="player-result">
         <div className="player-result-words">
           <h4 className="player-result-name">{this.props.player.profile.name}</h4>
-          <p className="player-answer">{this.props.player.guess}</p>
+          <p className="player-answer">{this.props.player.guessDisplay}</p>
         </div>
         <div className="player-result-icons">
           <span className="player-result-status">{this.props.player.points}</span>
