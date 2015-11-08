@@ -32,7 +32,7 @@ GameResults = React.createClass({
       // show all answers
       this.data.results.forEach( result => {
         result.guessDisplay = result.guess;
-
+        result.correctClass = result.points > 0 ? 'answer-correct' : 'answer-wrong';
       });
     }
     return allSubmitted;
@@ -66,6 +66,7 @@ GameResults = React.createClass({
           playerAnswer.image = null;
           playerAnswer.points = null;
         }
+        playerAnswer.correctClass = 'answer-pending';
         return playerAnswer;
       });
 
@@ -111,6 +112,8 @@ PlayerResult = React.createClass({
       backgroundImage : `url('${ this.props.player.image }')`
     };
 
+    let answerResultStatusClass = `player-result-status ${this.props.player.correctClass}`;
+
     return (
       <li className="player-result">
         <div className="player-result-words">
@@ -118,7 +121,7 @@ PlayerResult = React.createClass({
           <p className="player-answer">{this.props.player.guessDisplay}</p>
         </div>
         <div className="player-result-icons">
-          <span className="player-result-status">{this.props.player.points}</span>
+          <span className={answerResultStatusClass}>{this.props.player.points}</span>
           <span className="player-result-image-thumbnail" style={thumbnailStyle}></span>
         </div>
       </li>
