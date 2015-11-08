@@ -11,6 +11,7 @@ GoogleFu.Image = (() => {
 
   const GOOGLE_IMAGE_JSON_API_VERSION = '1.0';
   const GOOGLE_IMAGE_JSON_API_BASE_URL = 'https://ajax.googleapis.com/ajax/services/search/images';
+  const GOOGLE_THUMBNAIL_URL = 'http://t1.gstatic.com/images?q=tbn:';
 
   /*
    * validateQueryParams( opts:Options ):String
@@ -32,7 +33,6 @@ GoogleFu.Image = (() => {
     }
     return opts;
   };
-
 
   class Image{
 
@@ -61,8 +61,15 @@ GoogleFu.Image = (() => {
       return JSON.parse(result.content).responseData.results.map( img => img.imageId );
     }
 
-    static queryThumbnails(){
-      return false;
+    /*
+     * params:
+     *   - userip : String, requester's ip address
+     *   - q : String, google image search query
+     *
+     * returns Array<String>, 4 top image thumbnail urls
+     */
+    static queryThumbnails(userip, q){
+      return Image.query(userip, q).map( imageId => `${GOOGLE_THUMBNAIL_URL}${imageId}` );
     }
 
     static getTop(){
