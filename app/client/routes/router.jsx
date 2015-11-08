@@ -31,6 +31,7 @@ FlowRouter.route('/private/join', {
   }
 });
 
+
 FlowRouter.route('/public/join', {
   action() {
     ReactLayout.render(MainLayout, {
@@ -43,7 +44,7 @@ FlowRouter.route('/public/join', {
   }
 });
 
-FlowRouter.route('/public/lobby/:id', {
+FlowRouter.route('/lobby/:id', {
   action() {
     ReactLayout.render(MainLayout, {content: <GameLobby />});
   },
@@ -53,7 +54,7 @@ FlowRouter.route('/public/lobby/:id', {
   }
 });
 
-FlowRouter.route('/public/play/:id', {
+FlowRouter.route('/play/:id', {
   action() {
     ReactLayout.render(MainLayout, {content: <GameCenter />});
   },
