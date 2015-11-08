@@ -69,7 +69,7 @@ GoogleFu.GameController = (function(){
     var game = Games.findOne({code: roomCode});
 
     if(!game){
-      done('Invalid Room Code');
+      return done('Invalid Room Code');
     }
 
     addUserToGame(game._id, userName, (err, result) => {
