@@ -34,6 +34,11 @@ Schemas.Game = new SimpleSchema({
   },
   players: {
     type: [String],
+  },
+  status: {
+    type: Number,
+    allowedValues: [GoogleFu.Constants.GAME_PENDING, GoogleFu.Constants.GAME_STARTED, GoogleFu.Constants.GAME_ENDED],
+    defaultValue: GoogleFu.Constants.GAME_PENDING
   }
 });
 

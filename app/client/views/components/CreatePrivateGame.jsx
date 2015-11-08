@@ -1,5 +1,5 @@
 CreatePrivateGame = React.createClass({
-  _onClick() {
+  _createPrivateGame() {
     console.log('hallo');
   },
 
@@ -8,7 +8,7 @@ CreatePrivateGame = React.createClass({
       <div className="home">
         <h1>Create Private Game</h1>
         <input name="name" />
-        <button onClick={this._onClick}>Create Game</button>
+        <button onClick={this._createPrivateGame}>Create Game</button>
       </div>
     )
   }

@@ -26,11 +26,8 @@ FlowRouter.route('/private/join', {
 FlowRouter.route('/public/join', {
   action() {
     ReactLayout.render(MainLayout, { content: <JoinPublicGame /> });
+  },
+  subscriptions(params, queryParams) {
+    this.register('joinPublicGames', Meteor.subscribe('joinPublicGames'));
   }
 });
-
-// FlowRouter.route('/test', 
-//   action() {
-//     ReactLayout.render(MainLayout, { content: <Test /> });
-//   }
-// });
