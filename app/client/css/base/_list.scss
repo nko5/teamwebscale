@@ -1,0 +1,8 @@
+ol {
+  padding-left: 30px;
+  list-style: decimal;
+  li {
+    @include font-size(21px);
+    margin-bottom: 3vh;
+  }
+}

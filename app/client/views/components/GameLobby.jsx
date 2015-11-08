@@ -32,15 +32,18 @@ GameLobby = React.createClass({
       gameTitle = currentGame.title;
     }
 
+    let players = this.data.games.map((game) => {
       return <GamePlayers key={game._id} game={game} />
     });
 
     return (
-      <div className="home">
-        <button onClick={this._startGame}>Start Game</button>
-        <button onClick={this._leaveGame}>Leave Game</button>
-        {game}
+      <div className="game-lobby">
+        <div className="container">
           <h3>{gameTitle}</h3>
+          {players}
+          <button className="button button--blue" onClick={this._startGame}>Start Game</button>
+          <button className="button button--gray" onClick={this._leaveGame}>Leave Game</button>
+        </div>
       </div>
     )
   }
@@ -61,9 +64,9 @@ GamePlayers = React.createClass({
     });
 
     return (
-         <ul>
-          {players}
-        </ul>
+      <ol>
+        {players}
+      </ol>
     )
   }
 });
