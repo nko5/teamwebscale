@@ -23,3 +23,12 @@
 .player-result-icons {
   float: right;
 }
+
+.answer-wrong {
+  @extend .close-icon;
+  top: 22px;
+  left: -18px;
+  &:before, &:after {
+    background: $red;
+  }
+}
