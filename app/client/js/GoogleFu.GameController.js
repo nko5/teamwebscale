@@ -81,7 +81,7 @@ GoogleFu.GameController = (function(){
     let serverip = GoogleFu.IP.getAddress();
     let randomQuery = GoogleFu.Query.random();
     Meteor.call('GoogleFu.Image.getTopThumbnail', serverip, randomQuery, (err, topResultThumbnail) => {
-      let firstRoundObject = {'image': topResultThumbnail, 
+      let firstRoundObject = {'image': topResultThumbnail.url,
                               'correctAnswer': randomQuery
                               };
 
@@ -107,27 +107,34 @@ GoogleFu.GameController = (function(){
       throw new Meteor.Error('Invalid Game Id');
     }
 
+    // #todo Jason, get client's ip
+    let userip = GoogleFu.IP.getAddress();
+
     let currentGame = Games.findOne({_id: gameId});
-    let currentUserResult = {'user': userId,
-                              'guess': answer,
-                              'points': 0,
-                              'round': currentGame.currentRound,
-                              'image': currentGame.currentImage,
-                              'correctAnswer': currentGame.currentQuery 
-                           };
+    Meteor.call('GoogleFu.Image.getTopThumbnail', userip, answer, (err, topThumbnail) => {
+      Meteor.call('GoogleFu.Image.match', userip, currentGame.currentQuery, answer, (err, matches) => {
+        let currentUserResult = {'user': userId,
+                                  'guess': answer,
+                                  'points': 0,
+                                  'round': currentGame.currentRound,
+                                  'image': topThumbnail.url,
+                                  'correctAnswer': currentGame.currentQuery
+                               };
 
+        Games.update({_id: gameId},
+          {
+            $push: {
+              'answers': currentUserResult
+            }
+          },
+          (err, result) => {
+            if(err) return done(err);
 
-    Games.update({_id: gameId},
-      {
-        $push: {
-          'answers': currentUserResult
-        }
-      },
-      (err, result) => {
-        if(err) return done(err);
+            done(null, result);
+          });
 
-        done(null, result);
       });
+    });
   }
 
   return {
