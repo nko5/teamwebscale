@@ -13,7 +13,7 @@ GoogleFu.Image = (() => {
   const GOOGLE_IMAGE_JSON_API_BASE_URL = 'https://ajax.googleapis.com/ajax/services/search/images';
 
   /*
-   * generateUrl( url:String, opts:Options ):String
+   * validateQueryParams( opts:Options ):String
    *
    * Options : {
    *   userip : String,
@@ -21,17 +21,16 @@ GoogleFu.Image = (() => {
    *   q : String
    * }
    *
-   * returns a url with querystring parameters
+   * returns querystring parameters as hash table
    *
    */
-  let generateUrl = ( url, opts ) => {
+  let validateQueryParams = ( opts ) => {
     const requiredOpts = ['userip','v','q'];
     let missingOpts = requiredOpts.filter( requiredKey =>  !opts.hasOwnProperty(requiredKey) );
     if(missingOpts.length > 0){
       throw new Error( `GoogleFu.Image : generateUrl() opts argument is missing required keys: ${missingOpts.join(", ")}`);
     }
-    let params = Object.keys(opts).map( key => `${key}=${encodeURIComponent(opts[key])}` ).join('&');
-    return `${url}?${params}`;
+    return opts;
   };
 
 
@@ -45,15 +44,16 @@ GoogleFu.Image = (() => {
      * returns Array<String>, 4 top image result ids
      */
     static query(userip, q){
-      let queryURL = generateUrl( GOOGLE_IMAGE_JSON_API_BASE_URL, {
-        userip : userip,
-        v : GOOGLE_IMAGE_JSON_API_VERSION,
-        q : q
-      });
 
       let result;
       try{
-        result = HTTP.get( queryURL );
+        result = HTTP.get( GOOGLE_IMAGE_JSON_API_BASE_URL, {
+          params : validateQueryParams({
+            userip : userip,
+            v : GOOGLE_IMAGE_JSON_API_VERSION,
+            q : q
+          })
+        });
       }catch(error){
         throw new Error(`Fatal Error in GoogleFu.Image : query(${q}) HTTP.get( ${queryURL} ); ${error}`);
       }
