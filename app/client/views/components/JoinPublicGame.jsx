@@ -12,7 +12,7 @@ JoinPublicGame = React.createClass({
 
   renderGames() {
     return this.data.games.map((game) => {
-      return <Game key={game._id} game={game} />;
+      return <Game key={game._id} game={game} userName={this.refs.userName}/>;
     });
   },
 
@@ -20,7 +20,7 @@ JoinPublicGame = React.createClass({
     return (
       <div className="home">
         <h1>Join Public Game</h1>
-        <input name="name" placeholder="What is your name?"/>
+        <input ref="userName" placeholder="What is your name?"/>
         <h3>Choose A Room</h3>
         <ul>
           { this.renderGames() }
@@ -34,13 +34,16 @@ Game = React.createClass({
   propTypes: {
     // This component gets the task to display through a React prop.
     // We can use propTypes to indicate it is required
-    game: React.PropTypes.object.isRequired
+    game: React.PropTypes.object.isRequired,
+    // userName: React.PropTypes.object.isRequired
   },
 
   _joinGame() {
-    GoogleFu.GameController.joinGame(this.props.game._id, Meteor.userId(), (err, result) => {
+    let userName = this.props.userName.value.trim();
+    GoogleFu.GameController.joinGame(this.props.game._id, userName, (err, result) => {
       if(err) throw new Meteor.Error(err);
 
+      //redirect to lobby
       FlowRouter.go('/public/lobby/' + this.props.game._id); 
     });
   },

@@ -10,3 +10,9 @@ GoogleFu.Constants = {
 };
 
 Object.freeze(GoogleFu.Constants);
+
+Meteor.startup(function(){
+  Accounts.createUser({username: 'rando' + Math.random(), 
+                        password: 'random', 
+                        profile: {name: ''}});
+});
