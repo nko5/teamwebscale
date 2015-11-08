@@ -82,3 +82,13 @@ FlowRouter.route('/results/:id', {
     this.register('gamePlayers', Meteor.subscribe('gamePlayers', params.id));
   }
 });
+
+FlowRouter.route('/summary/:id', {
+  action() {
+    ReactLayout.render(MainLayout, {content: <GameSummary />});
+  },
+  subscriptions(params, queryParams) {
+    this.register('game', Meteor.subscribe('game', params.id));
+    this.register('gamePlayers', Meteor.subscribe('gamePlayers', params.id));
+  }
+});
