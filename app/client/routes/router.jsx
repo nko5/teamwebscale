@@ -46,7 +46,10 @@ FlowRouter.route('/public/join', {
 
 FlowRouter.route('/lobby/:id', {
   action() {
-    ReactLayout.render(MainLayout, {content: <GameLobby />});
+    ReactLayout.render(MainLayout, {
+      content: <GameLobby />,
+      title: 'Public Game'
+    });
   },
   subscriptions(params, queryParams) {
     this.register('game', Meteor.subscribe('game', params.id));
