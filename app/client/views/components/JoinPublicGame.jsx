@@ -36,9 +36,18 @@ Game = React.createClass({
     // We can use propTypes to indicate it is required
     game: React.PropTypes.object.isRequired
   },
+
+  _joinGame() {
+    GoogleFu.GameController.joinGame(this.props.game._id, Meteor.userId(), (err, result) => {
+      if(err) throw new Meteor.Error(err);
+
+      FlowRouter.go('/public/lobby/' + this.props.game._id); 
+    });
+  },
+
   render() {
     return (
-      <li>{this.props.game.title}</li>
+      <li onClick={this._joinGame}>{this.props.game.title}</li>
     );
   }
 });

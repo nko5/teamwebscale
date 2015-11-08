@@ -54,8 +54,23 @@ GoogleFu.GameController = (function(){
     });
   }
 
+  function joinGame(gameId, userId, done){
+   if(!gameId || !userId){
+    throw new Meteor.Error('Invalid Params to Join Game');
+   }
+
+   Games.update({_id: gameId},
+                {$push: {players: userId}}
+    , (err, result) => {
+      if(err) return done(err);
+
+      done(null, result);
+    }); 
+  }
+
   return {
     createPublicGame: createPublicGame,
-    createPrivateGame: createPrivateGame
+    createPrivateGame: createPrivateGame,
+    joinGame: joinGame
   }
 })();

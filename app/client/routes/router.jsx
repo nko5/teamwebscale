@@ -37,3 +37,13 @@ FlowRouter.route('/public/join', {
     this.register('joinPublicGames', Meteor.subscribe('joinPublicGames'));
   }
 });
+
+FlowRouter.route('/public/lobby/:id', {
+  action() {
+    ReactLayout.render(MainLayout, {content: <GameLobby />});
+  },
+  subscriptions(params, queryParams) {
+    this.register('game', Meteor.subscribe('game', params.id));
+    this.register('gamePlayers', Meteor.subscribe('gamePlayers', params.id));
+  }
+});
