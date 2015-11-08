@@ -1,8 +1,14 @@
 Header = React.createClass({
+  getInitialState() {
+    return {
+      title: this.props.title
+    }
+  },
+
   render() {
     return (
       <header>
-        <p>Header</p>
+        {this.state.title}
       </header>
     )
   }
