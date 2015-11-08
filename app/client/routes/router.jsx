@@ -6,13 +6,19 @@ FlowRouter.route('/', {
 
 FlowRouter.route('/public/new', {
   action() {
-    ReactLayout.render(MainLayout, { content: <CreatePublicGame /> });
+    ReactLayout.render(MainLayout, {
+      content: <CreatePublicGame />,
+      title: 'Create a Public Game'
+    });
   }
 });
 
 FlowRouter.route('/private/new', {
   action() {
-    ReactLayout.render(MainLayout, { content: <CreatePrivateGame /> });
+    ReactLayout.render(MainLayout, {
+      content: <CreatePrivateGame />,
+      title: 'Create a Private Game'
+    });
   }
 });
 
