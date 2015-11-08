@@ -10,5 +10,6 @@ Meteor.methods({
   'GoogleFu.Image.queryThumbnails' : GoogleFu.Image.queryThumbnails,
   'GoogleFu.Image.getTop' : GoogleFu.Image.getTop,
   'GoogleFu.Image.getTopThumbnail' : GoogleFu.Image.getTopThumbnail,
+  'GoogleFu.Image.match' : GoogleFu.Image.match,
 });
 
