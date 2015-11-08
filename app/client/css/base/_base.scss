@@ -13,4 +13,21 @@ html {
 body {
   width: 100%;
   height: 100%;
+  font-family: $base-font-family;
+}
+
+.logo {
+  margin-bottom: 11vh;
+  text-align: center;
+  img {
+    display: block;
+    width: 100%;
+  }
+  small {
+    color: darken($white, 25%);
+  }
+}
+
+input, textarea, keygen, select, button {
+  font-family: inherit;
 }

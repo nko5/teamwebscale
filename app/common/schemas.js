@@ -33,8 +33,12 @@ Schemas.Game = new SimpleSchema({
     allowedValues: [GoogleFu.Constants.PRIVATE_GAME, GoogleFu.Constants.PUBLIC_GAME],
   },
   players: {
-    type: [Object],
-    optional: true
+    type: [String],
+  },
+  status: {
+    type: Number,
+    allowedValues: [GoogleFu.Constants.GAME_PENDING, GoogleFu.Constants.GAME_STARTED, GoogleFu.Constants.GAME_ENDED],
+    defaultValue: GoogleFu.Constants.GAME_PENDING
   }
 });
 

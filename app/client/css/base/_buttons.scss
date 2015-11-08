@@ -1,0 +1,22 @@
+.button {
+  @include font-size(18px);
+  display: block;
+  width: 100%;
+  margin-bottom: 3vh;
+  padding: rem(20px);
+  border: 0;
+  border-radius: 2px;
+  color: $white;
+  &--green {
+    background: $green;
+  }
+  &--blue {
+    background: $blue;
+  }
+}
+
+.private__buttons {
+  margin-bottom: 7vh;
+}
+
+
