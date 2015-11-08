@@ -13,7 +13,7 @@ Header = React.createClass({
     return (
       <header>
         {this.state.title}
-        <a href="#" className="close-icon hide-text" onClick={this._goHome}>
+        <a href="#" className="close-icon close-icon--right hide-text" onClick={this._goHome}>
           Close
         </a>
       </header>

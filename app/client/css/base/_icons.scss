@@ -1,9 +1,8 @@
 .close-icon {
   $size: rem(22px);
-  display: block;
-  position: absolute;
-  top: 20px;
-  right: 20px;
+  display: inline-block;
+  position: relative;
+  left: 14px;
   width: $size;
   height: $size;
   &:before, &:after {
@@ -21,5 +20,17 @@
   }
   &:after {
     transform: rotate(135deg);
+  }
+  &--right {
+    display: block;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    left: auto;
+  }
+  &--gray {
+    &:before, &:after {
+      background: lighten($black, 30%);
+    }
   }
 }

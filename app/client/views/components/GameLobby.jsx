@@ -67,7 +67,7 @@ GamePlayers = React.createClass({
     });
 
     return (
-      <ol>
+      <ol className="players-list" >
         {players}
       </ol>
     )
@@ -80,9 +80,18 @@ Player = React.createClass({
     // We can use propTypes to indicate it is required
     player: React.PropTypes.object.isRequired
   },
+
+  _removePlayer() {
+    // remove player here
+    console.log('bye bye ' + this.props.player.profile.name);
+  },
+
   render() {
     return (
-      <li>{this.props.player.profile.name}</li>
+      <li className="players-list__item">
+        {this.props.player.profile.name}
+        <a href="#" className="close-icon close-icon--gray hide-text" onClick={this._removePlayer}>Dismiss</a>
+      </li>
     );
   }
 });
