@@ -59,16 +59,16 @@ Schemas.Game = new SimpleSchema({
   "answers.$.round": {
     type: Number
   },
-  "answer.$.user": {
+  "answers.$.user": {
     type: String
   },
-  "answer.$.image": {
+  "answers.$.image": {
     type: String 
   },
-  "answer.$.guess":{
+  "answers.$.guess":{
     type: String
   },
-  "answer.$.points": {
+  "answers.$.points": {
     type: Number
   },
   rounds: {
