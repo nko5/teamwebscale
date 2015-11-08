@@ -11,5 +11,6 @@ Meteor.methods({
   'GoogleFu.Image.getTop' : GoogleFu.Image.getTop,
   'GoogleFu.Image.getTopThumbnail' : GoogleFu.Image.getTopThumbnail,
   'GoogleFu.Image.match' : GoogleFu.Image.match,
+  'GoogleFu.GameName.generate' : GoogleFu.GameName.generate,
 });
 
