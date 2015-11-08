@@ -1,8 +1,8 @@
 'use strict';
 
 /* global
-  GoogleFu
-  HTTP
+  GoogleFu,
+  HTTP,
   Meteor
 */
 
@@ -55,7 +55,7 @@ GoogleFu.Image = (() => {
           })
         });
       }catch(error){
-        throw new Error(`Fatal Error in GoogleFu.Image : query(${q}) HTTP.get( ${queryURL} ); ${error}`);
+        throw new Error(`Fatal Error in GoogleFu.Image : query(${q}) HTTP.get(); ${error}`);
       }
 
       return JSON.parse(result.content).responseData.results.map( img => img.imageId );
@@ -83,8 +83,15 @@ GoogleFu.Image = (() => {
       return Image.query(userip, q)[0];
     }
 
-    static getTopThumbnail(){
-      return false;
+    /*
+     * params:
+     *   - userip : String, requester's ip address
+     *   - q : String, google image search query
+     *
+     * returns String, top image thumbnail url
+     */
+    static getTopThumbnail(userip, q){
+      return Image.queryThumbnails(userip, q)[0];
     }
 
   }
