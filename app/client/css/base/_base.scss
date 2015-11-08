@@ -31,3 +31,8 @@ body {
 input, textarea, keygen, select, button {
   font-family: inherit;
 }
+
+.warning {
+  margin-bottom: 1vh;
+  color: $red;
+}
