@@ -6,26 +6,38 @@ FlowRouter.route('/', {
 
 FlowRouter.route('/public/new', {
   action() {
-    ReactLayout.render(MainLayout, { content: <CreatePublicGame /> });
+    ReactLayout.render(MainLayout, {
+      content: <CreatePublicGame />,
+      title: 'Create a Public Game'
+    });
   }
 });
 
 FlowRouter.route('/private/new', {
   action() {
-    ReactLayout.render(MainLayout, { content: <CreatePrivateGame /> });
+    ReactLayout.render(MainLayout, {
+      content: <CreatePrivateGame />,
+      title: 'Create a Private Game'
+    });
   }
 });
 
 FlowRouter.route('/private/join', {
   action() {
-    ReactLayout.render(MainLayout, { content: <JoinPrivateGame /> });
+    ReactLayout.render(MainLayout, {
+      content: <JoinPrivateGame />,
+      title: 'Join a Private Game'
+    });
   }
 });
 
 
 FlowRouter.route('/public/join', {
   action() {
-    ReactLayout.render(MainLayout, { content: <JoinPublicGame /> });
+    ReactLayout.render(MainLayout, {
+      content: <JoinPublicGame />,
+      title: 'Join a Public Game'
+    });
   },
   subscriptions(params, queryParams) {
     this.register('joinPublicGames', Meteor.subscribe('joinPublicGames'));

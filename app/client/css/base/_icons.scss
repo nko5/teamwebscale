@@ -1,0 +1,25 @@
+.close-icon {
+  $size: rem(22px);
+  display: block;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: $size;
+  height: $size;
+  &:before, &:after {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: rem(4px);
+    border-radius: 1px;
+    background: $white;
+    content: '';
+  }
+  &:before {
+    transform: rotate(45deg);
+  }
+  &:after {
+    transform: rotate(135deg);
+  }
+}

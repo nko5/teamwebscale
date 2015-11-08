@@ -30,7 +30,8 @@ if (!(typeof MochaWeb === 'undefined')){
         'ANd9GcReV5JLtAkhBg_8nb1X3Hwmgz79xD12Yho2EADgq0MyWz9N-qqza1lPb81z',
         'ANd9GcTHsSKvO6DGUWbJUdhAbbeepUMYpBjY2ipMmCCQCi1LTZXSatLZOiuSUMM',
         'ANd9GcT_WDc0_gJu8xDAIFNkq0v6y2dbivRAix3EwKjlMQs0vscc-hCQO56Q3n4',
-        'ANd9GcS4hcJfxmETO_-rLIyeUlGelFTvzf_o4ogyPbq5oXclPXYp5I0mKC_1YEUC'
+        'ANd9GcS4hcJfxmETO_-rLIyeUlGelFTvzf_o4ogyPbq5oXclPXYp5I0mKC_1YEUC',
+        'ANd9GcTln9UztmWu2VtgsjdUGT_AkFh_jf83l4Y7CJMR0iVJxjrd9DsvAuHFZQ'
       ];
 
       const valid_node_js_thumbnail_results = [
@@ -44,7 +45,8 @@ if (!(typeof MochaWeb === 'undefined')){
         'http://t1.gstatic.com/images?q=tbn:ANd9GcReV5JLtAkhBg_8nb1X3Hwmgz79xD12Yho2EADgq0MyWz9N-qqza1lPb81z',
         'http://t1.gstatic.com/images?q=tbn:ANd9GcTHsSKvO6DGUWbJUdhAbbeepUMYpBjY2ipMmCCQCi1LTZXSatLZOiuSUMM',
         'http://t1.gstatic.com/images?q=tbn:ANd9GcT_WDc0_gJu8xDAIFNkq0v6y2dbivRAix3EwKjlMQs0vscc-hCQO56Q3n4',
-        'http://t1.gstatic.com/images?q=tbn:ANd9GcS4hcJfxmETO_-rLIyeUlGelFTvzf_o4ogyPbq5oXclPXYp5I0mKC_1YEUC'
+        'http://t1.gstatic.com/images?q=tbn:ANd9GcS4hcJfxmETO_-rLIyeUlGelFTvzf_o4ogyPbq5oXclPXYp5I0mKC_1YEUC',
+        'http://t1.gstatic.com/images?q=tbn:ANd9GcTln9UztmWu2VtgsjdUGT_AkFh_jf83l4Y7CJMR0iVJxjrd9DsvAuHFZQ'
       ];
 
       describe('query(userip:String, query:String, cb(result:Array<StringID>))', () => {
@@ -256,7 +258,7 @@ if (!(typeof MochaWeb === 'undefined')){
 
           // this may fail if result change
           it('should return true for similar matching queries', () =>{
-            expect(giraffe_waffle_result).to.be.true();
+            expect(giraffe_waffle_result).to.be.true;
           });
 
         });
@@ -273,7 +275,7 @@ if (!(typeof MochaWeb === 'undefined')){
 
           // this may fail if result change
           it('should return true for similar matching queries', () =>{
-            expect(node_js_result).to.true();
+            expect(node_js_result).to.be.true;
           });
         });
 
@@ -289,7 +291,7 @@ if (!(typeof MochaWeb === 'undefined')){
 
           // this may fail if result change
           it('should return false for mismatching queries', () =>{
-            expect(java_result).to.false();
+            expect(java_result).to.be.false;
           });
         });
 

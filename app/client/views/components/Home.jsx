@@ -18,7 +18,7 @@ Home = React.createClass({
 
   render() {
     return (
-      <div className="home">
+      <div className="home center-container">
         <div className="container">
           <h1 className="logo">
             <img src="/images/googlefu-logo.png" alt="Google-Fu"/>
