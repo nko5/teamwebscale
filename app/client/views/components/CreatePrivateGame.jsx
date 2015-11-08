@@ -1,6 +1,9 @@
 CreatePrivateGame = React.createClass({
   _createPrivateGame() {
-    console.log('hallo');
+    let userName = ReactDOM.findDOMNode(this.refs.userName).value.trim();
+    GoogleFu.GameController.createPrivateGame(userName, (err, result) => {
+      FlowRouter.go('/lobby/' + result);
+    });
   },
 
   render() {
