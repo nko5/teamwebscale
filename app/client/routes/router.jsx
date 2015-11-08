@@ -75,7 +75,10 @@ FlowRouter.route('/play/:id', {
 
 FlowRouter.route('/results/:id', {
   action() {
-    ReactLayout.render(MainLayout, {content: <GameResults />});
+    ReactLayout.render(MainLayout, {
+      content: <GameResults />,
+      title: 'Results'
+    });
   },
   subscriptions(params, queryParams) {
     this.register('game', Meteor.subscribe('game', params.id));
