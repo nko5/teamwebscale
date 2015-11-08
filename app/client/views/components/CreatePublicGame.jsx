@@ -11,10 +11,12 @@ CreatePublicGame = React.createClass({
 
   render() {
     return (
-      <div className="home">
-        <h1>Create Public Game</h1>
-        <input type="text" ref="userName" placeholder="What is your name?" />
-        <button onClick={this._createGame}>Create Game</button>
+      <div className="create-game center-container">
+        <div className="container">
+          <h1>Create Public Game</h1>
+          <input type="text" ref="userName" placeholder="What is your name?" />
+          <button onClick={this._createGame}>Create Game</button>
+        </div>
       </div>
     )
   }
