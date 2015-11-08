@@ -10,19 +10,17 @@ JoinPublicGame = React.createClass({
     }
   },
 
-  renderGames() {
-    return this.data.games.map((game) => {
+  render() {
+    let games = this.data.games.map((game) => {
       return <Game key={game._id} game={game} />;
     });
-  },
 
-  render() {
     return (
       <div className="join-game container">
         <input name="name" placeholder="What is your name?"/>
         <h3>Choose a Room</h3>
         <ul className="rooms">
-          { this.renderGames() }
+          {games}
         </ul>
       </div>
     )
