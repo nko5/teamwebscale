@@ -3,14 +3,10 @@ GameLobby = React.createClass({
 
   getMeteorData() {
     return {
-      game:  Games.findOne({
+      games:  Games.find({
                 _id: FlowRouter.getParam('id')
-              })
+              }).fetch()
     };
-  },
-
-  renderPlayerSection() {
-    return <GamePlayers key={this.data.game._id} game={this.data.game} />
   },
 
   _startGame() {
@@ -21,12 +17,16 @@ GameLobby = React.createClass({
   },
 
   render() {
+
+    let game = this.data.games.map((game) => {
+      return <GamePlayers key={game._id} game={game} />
+    });
+    
     return (
       <div className="home">
         <h1>Public Game</h1>
         <button onClick={this._startGame}>Start Game</button>
-        <button onClick={this._leaveGame}>Leave Game</button>
-        { this.renderPlayerSection() }
+        {game}
       </div>
     )
   }
@@ -37,21 +37,18 @@ GamePlayers = React.createClass({
 
   getMeteorData() {
     return {
-      game: Games.findOne({_id: this.props.game._id}),
       players: Meteor.users.find({_id: {$in: this.props.game.players}}).fetch()
     };
   },
 
-  renderPlayers() {
-    return this.data.players.map((player) => {
+  render() {
+    let players = this.data.players.map((player) => {
       return <Player key={player._id} player={player} />;
     });
-  },
 
-  render() {
     return (
          <ul>
-          { this.renderPlayers() }
+          {players}
         </ul>
     )
   }

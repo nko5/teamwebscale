@@ -32,40 +32,53 @@ GoogleFu.GameController = (function(){
   function createPublicGame(name, done){
     let gameTitle = getGameTitle();
 
-    Accounts.createUser({username: name + Math.random(), password: 'random', profile:{name: name}}, (err) => {
-      if(err){
-        throw new Meteor.Error('Could not create user');
+    Meteor.users.update(
+      {_id: Meteor.userId()}, 
+      {$set:{'profile.name': name}}, 
+      (err, result) => {
+        createGame(gameTitle, 
+                    Meteor.userId(), 
+                    GoogleFu.Constants.PUBLIC_GAME, 
+                    done);
       }
-
-      createGame(gameTitle, Meteor.userId(), GoogleFu.Constants.PUBLIC_GAME, done);
-    });
+    );
   }
 
   function createPrivateGame(name, done){
     let gameTitle = getGameTitle();
     let gameAccessCode = getGameAccessCode();
 
-    Accounts.createUser({username: name + Math.random(), password: 'random', profile: {name: name}}, (err) => {
-      if(err){
-        throw new Meteor.Error('Could not create user');
+    Meteor.users.update(
+      {_id: Meteor.userId()}, 
+      {$set:{'profile.name': name}},
+      (err, result) => {
+        createGame(gameTitle, 
+                    Meteor.userId(), 
+                    GoogleFu.Constants.PRIVATE_GAME, 
+                    gameAccessCode, 
+                    done); 
       }
-      
-      createGame(gameTitle, Meteor.userId(), GoogleFu.Constants.PRIVATE_GAME, gameAccessCode, done); 
-    });
+    );
   }
 
-  function joinGame(gameId, userId, done){
-   if(!gameId || !userId){
+  function joinGame(gameId, userName, done){
+   if(!gameId || !Meteor.userId()){
     throw new Meteor.Error('Invalid Params to Join Game');
    }
 
-   Games.update({_id: gameId},
-                {$push: {players: userId}}
-    , (err, result) => {
-      if(err) return done(err);
+   Meteor.users.update(
+      {_id: Meteor.userId()}, 
+      {$set:{'profile.name': userName}},
+      (err, result) => {
+        Games.update({_id: gameId},
+                    {$push: {players: Meteor.userId()}}
+        , (err, result) => {
+          if(err) return done(err);
 
-      done(null, result);
-    }); 
+          done(null, result);
+        }); 
+      }
+    );
   }
 
   return {
