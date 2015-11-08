@@ -41,7 +41,7 @@ GameCenter = React.createClass({
       <div className="game-play container">
         <h1>{ currentRound } <span className="time-remaining">{ timeRemaining }</span></h1>
         <div className="question-image" style={ questionBGimgStyle }></div>
-        <textarea rows="4" ref="playerAnswer" placeholder="What would you Google to get this as your #1 image result?"></textarea>
+        <textarea rows="3" ref="playerAnswer" placeholder="What would you Google to get this as your #1 image result?"></textarea>
         <button type="button" onClick={this._search}>Search</button>
       </div>
     )
