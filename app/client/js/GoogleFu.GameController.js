@@ -21,7 +21,7 @@ GoogleFu.GameController = (function(){
       players: [userId],
       currentImage: null, // image being displayed this round
       currentQuery: null,  // query used to get currentImage
-      round: 0
+      currentRound: 0
     }, (err, result) => {
       if(err) return done(err);
 
@@ -140,8 +140,12 @@ GoogleFu.GameController = (function(){
                       $set: {
                         status: GoogleFu.Constants.GAME_STARTED,
                         currentImage : topResultThumbnail,
-                        currentQuery : randomQuery
-                    }}
+                        currentQuery : randomQuery,
+                      },
+                      $inc: {
+                        currentRound : 1
+                      }
+                    }
                     , (err, result) => {
                       if(err) return done(err);
 

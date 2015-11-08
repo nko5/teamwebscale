@@ -32,12 +32,31 @@ GameResults = React.createClass({
       // show all answers
       this.data.results.forEach( result => {
         result.guessDisplay = result.guess;
-
+        result.correctClass = result.points > 0 ? 'answer-correct' : 'answer-wrong';
       });
     }
     return allSubmitted;
   },
 
+  _handleRoundBumping() {
+
+    if( Session.get('gameRound') == null ){
+      // initial setting
+      Session.set('gameRound', this.data.game.currentRound );
+    }else if( this.data.game.currentRound > Session.get('gameRound') ){
+      // round bumped, move everyone into next round
+      if( this.data.game.currendRound > GoogleFu.Constants.SETTINGS.TOTAL_ROUNDS ){
+        FlowRouter.go('/summary/' + FlowRouter.getParam('id'));
+      }else{
+        FlowRouter.go('/play/' + FlowRouter.getParam('id'));
+      }
+    }
+
+  },
+
+  componentWillUnmount() {
+    Session.set('gameRound', null);
+  },
 
   render() {
     let currentImage;
@@ -46,6 +65,7 @@ GameResults = React.createClass({
     let nextRoundStyles;
     if(this.data.game){
 
+      this._handleRoundBumping();
       currentImage = this.data.game.currentImage.url;
       currentRound = this.data.game.rounds.length;
       this.data.results = this.data.game.players.map( playerId => {
@@ -66,6 +86,7 @@ GameResults = React.createClass({
           playerAnswer.image = null;
           playerAnswer.points = null;
         }
+        playerAnswer.correctClass = 'answer-pending';
         return playerAnswer;
       });
 
@@ -113,6 +134,8 @@ PlayerResult = React.createClass({
       backgroundImage : `url('${ this.props.player.image }')`
     };
 
+    let answerResultStatusClass = `player-result-status ${this.props.player.correctClass}`;
+
     return (
       <li className="player-result">
         <div className="row">
@@ -123,6 +146,7 @@ PlayerResult = React.createClass({
             </h3>
           </div>
           <div className="player-result-icons">
+            <span className={answerResultStatusClass}></span>
             <span className="tiny-question-image player-result-image-thumbnail" style={thumbnailStyle}></span>
           </div>
         </div>
