@@ -19,11 +19,14 @@ Home = React.createClass({
   render() {
     return (
       <div className="home">
-        <h1>Google Fu</h1>
         <button onClick={this._createPrivateGame}>Create a Private Game</button>
         <button onClick={this._joinPublicGame}>Join a Private Game</button>
         <button onClick={this._createPublicGame}>Create a Public Game</button>
         <button onClick={this._joinPrivateGame}>Join a Public Game</button>
+          <h1 className="logo">
+            <img src="/images/googlefu-logo.png" alt="Google-Fu"/>
+            <small>Version 1.0</small>
+          </h1>
       </div>
     )
   }
