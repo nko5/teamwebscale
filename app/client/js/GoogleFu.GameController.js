@@ -82,8 +82,7 @@ GoogleFu.GameController = (function(){
     let randomQuery = GoogleFu.Query.random();
     Meteor.call('GoogleFu.Image.getTopThumbnail', serverip, randomQuery, (err, topResultThumbnail) => {
       let firstRoundObject = {'image': topResultThumbnail, 
-                              'correctAnswer': randomQuery,
-                              'results': []
+                              'correctAnswer': randomQuery
                               };
 
       Games.update({_id: gameId},
@@ -108,23 +107,23 @@ GoogleFu.GameController = (function(){
       throw new Meteor.Error('Invalid Game Id');
     }
 
-    let currentRound = Games.findOne({_id: gameId}).currentRound;
-    let currentUserResult = {'userId': userId,
+    let currentGame = Games.findOne({_id: gameId});
+    let currentUserResult = {'user': userId,
                               'guess': answer,
-                              'points': 0
+                              'points': 0,
+                              'round': currentGame.currentRound,
+                              'image': currentGame.currentImage,
+                              'correctAnswer': currentGame.currentQuery 
                            };
+
 
     Games.update({_id: gameId},
       {
         $push: {
-          'rounds.results': {
-            $each: [currentUserResult],
-            $position: currentRound
-          }
+          'answers': currentUserResult
         }
       },
-      {validate: false}
-      , (err, result) => {
+      (err, result) => {
         if(err) return done(err);
 
         done(null, result);
