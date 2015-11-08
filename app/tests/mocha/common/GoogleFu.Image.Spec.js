@@ -237,6 +237,64 @@ if (!(typeof MochaWeb === 'undefined')){
 
       });
 
+
+      describe('match( answer:String, guess:String ):Bool [static method]', () => {
+
+        describe('match("giraffe waffle", "waffle iron giraffe");', () => {
+
+          let giraffe_waffle_result;
+          before( done => {
+            Meteor.call('GoogleFu.Image.match', userip, "giraffe waffle", "waffle iron giraffe", (err,result) => {
+              giraffe_waffle_result = result;
+              done();
+            });
+          });
+
+          it('should return a Boolean', () => {
+            expect(giraffe_waffle_result).to.be.a('boolean');
+          });
+
+          // this may fail if result change
+          it('should return true for similar matching queries', () =>{
+            expect(giraffe_waffle_result).to.be.true();
+          });
+
+        });
+
+        describe('match("node js","nodejs");', () => {
+
+          let node_js_result;
+          before(() => {
+            Meteor.call('GoogleFu.Image.match', userip, "node js", "nodejs", (err,result) => {
+              node_js_result = result;
+              done();
+            });
+          });
+
+          // this may fail if result change
+          it('should return true for similar matching queries', () =>{
+            expect(node_js_result).to.true();
+          });
+        });
+
+        describe('match("java","javascript");', () => {
+
+          let java_result;
+          before(() => {
+            Meteor.call('GoogleFu.Image.match', userip, "java", "javascript", (err,result) => {
+              java_result = result;
+              done();
+            });
+          });
+
+          // this may fail if result change
+          it('should return false for mismatching queries', () =>{
+            expect(java_result).to.false();
+          });
+        });
+
+      });
+
     });
   });
 }
